@@ -22,6 +22,3 @@ def test():
     print(cur.fetchone()[0].startswith('PostgreSQL'))
     conn.close()
 
-
-test()
-
