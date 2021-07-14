@@ -46,6 +46,43 @@ def create_collection(user):
     connection.close()
 
 
+def delete_collection(user):
+    connection = connect()
+    cursor = connection.cursor()
+    collect = input("What is the name of the collection you wish to delete?\n")
+    if collect == "quit":
+        return
+    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+    exists = cursor.fetchone()[0]
+    if exists > 0:
+        cursor.execute('DELETE FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+        connection.commit()
+        print("Collection successfully deleted!")
+    else:
+        print("This collection was not found.")
+    connection.close()
+
+
+def rename_collection(user):
+    connection = connect()
+    cursor = connection.cursor()
+    collect = input("What is the name of the collection you wish to rename?\n")
+    if collect == "quit":
+        return
+    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+    exists = cursor.fetchone()[0]
+    if exists > 0:
+        rename = input("What is the new name you wish to give it?\n")
+        if rename == "quit":
+            return
+        cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collect, user))
+        connection.commit()
+        print("Collection successfully renamed!")
+    else:
+        print("This collection was not found.")
+    connection.close()
+
+
 def collections(user):
     while True:
         print("Hello " + user)
@@ -71,7 +108,7 @@ def collections(user):
         elif choice == "5":
             play_collection()
         elif choice == "6":
-            rename_collection()
+            rename_collection(user)
         elif choice == "7":
             view_collections()
         elif choice == "8":
@@ -118,6 +155,7 @@ def login():
     print("Login Unsuccessful")
     print("Username or Password incorrect")
     return ''
+
 
 def searchUser(current_user):
     email = input("Enter email of user to search for:")

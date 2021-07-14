@@ -28,7 +28,8 @@ def main():
             print("2: Find Users")
             print("3: Collections submenu")
             print("4: quit")
-            choice = int(input())
+            choice = input()
+
             if choice == "1":
                 print("temp")
             elif choice == "2":
