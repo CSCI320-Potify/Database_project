@@ -2,6 +2,7 @@ from src.cli import *
 
 
 def main():
+    populateTestData()
     current_user = ''
     print("Welcome to Potify")
     print("Select one of the following options")
@@ -30,7 +31,7 @@ def main():
             print("4: quit")
             choice = int(input())
             if choice == 1:
-                print("temp")
+                songSearch()
             elif choice == 2:
                 searchUser(current_user)
             elif choice == 3:

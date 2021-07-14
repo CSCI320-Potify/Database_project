@@ -18,10 +18,10 @@ Let's Think About Living,Bob Luman,Livin' Lovin' Sounds,124800,"['pop', 'pop roc
 How High the Moon - Remastered,Les Paul & Mary Ford,How High the Moon (Remastered),125289,"['brostep', 'edm', 'pop', 'pop dance', 'progressive electro house']",1920
 (What A) Wonderful World - Remastered,Sam Cooke,The Wonderful World Of Sam Cooke (Remastered),125507,"['dance pop', 'pop', 'post-teen pop']",1920
 Hearts of Stone,The Fontaine Sisters,Happy Days and Lonely Nights,125852,"['permanent wave', 'pop']",1920
-"Walk, Don't Run",The Ventures,The Very Best Of The Ventures,126480,['electro house'],1920
+Walk Don't Run,The Ventures,The Very Best Of The Ventures,126480,['electro house'],1920
 Footsteps,Steve Lawrence,Footsteps,127018,"['latin', 'puerto rican pop', 'reggaeton', 'trap latino']",1920
 Heartbreak Hotel,Elvis Presley,Elvis' Golden Records,127560,"['latin', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1920
-"Go, Jimmy, Go",Jimmy Clanton,"Go, Jimmy, Go",128888,"['dance pop', 'pop', 'post-teen pop', 'r&b']",1920
+Go Jimmy Go,Jimmy Clanton,"Go, Jimmy, Go",128888,"['dance pop', 'pop', 'post-teen pop', 'r&b']",1920
 The Big Hurt,Toni Fisher,The Big Hurt!,129106,"['british soul', 'pop', 'pop soul', 'uk pop']",1920
 Good Timin,Jimmy Jones,Classic and Collectable - Jimmy Jones - Good Timin',129306,"['emo rap', 'miami hip hop']",1920
 (We're Gonna) Rock Around The Clock,Bill Haley & His Comets,Rock Around The Clock,129893,"['dance pop', 'pop', 'post-teen pop']",1920
@@ -57,7 +57,7 @@ Cradle Of Love,Johnny Preston,Above The Clouds,140200,"['chicago rap', 'melodic 
 Wild One,Bobby Rydell,Wild One,141009,"['dance pop', 'pop', 'post-teen pop', 'uk pop']",1920
 The Old Lamplighter,The Browns,The Complete Pop & Country Hits,141120,"['rap', 'slap house']",1920
 The Ballad of Davy Crockett,Bill Hayes,The Ballad of Davy Crockett,141410,"['latin', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1920
-"Please Help Me, I'm Falling",Hank Locklin,RCA Country Legends,141467,"['alternative rock', 'funk metal', 'funk rock', 'permanent wave', 'rock']",1920
+Please Help Me I'm Falling,Hank Locklin,RCA Country Legends,141467,"['alternative rock', 'funk metal', 'funk rock', 'permanent wave', 'rock']",1920
 Mule Skinner Blues,The Fendermen,Mule Skinner Blues,142267,"['pop', 'pop rap', 'post-teen pop', 'rap']",1920
 This Ole House - Single Version,Rosemary Clooney,The Essential Rosemary Clooney,142267,"['dance pop', 'pop', 'post-teen pop', 'uk pop']",1920
 Let the Little Girl Dance,Billy Bland,The Original Hit Recording - Let the Little Girl Dance,143099,"['colombian pop', 'latin', 'latin pop', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1920
@@ -132,17 +132,17 @@ Hey There,Rosemary Clooney,Everything's Coming Up Rosie,157227,"['detroit hip ho
 The Wayward Wind,Gogi Grant,Gogi Grant,157280,"['dance pop', 'latin', 'miami hip hop', 'pop', 'pop rap']",1930
 Why,Frankie Avalon,Beach Party,157520,"['colombian pop', 'reggaeton colombiano']",1930
 Stringin the Blues,Joe Venuti & Eddie Lang,The Best,157584,"['irish rock', 'permanent wave', 'rock']",1930
-"Cold, Cold Heart",Tony Bennett,60 Years: The Artistry of Tony Bennett,157600,"['dance pop', 'miami hip hop', 'pop', 'pop rap']",1930
+Cold Cold Heart,Tony Bennett,60 Years: The Artistry of Tony Bennett,157600,"['dance pop', 'miami hip hop', 'pop', 'pop rap']",1930
 Paper Doll - Single Version,The Mills Brothers,All Time Greatest Hits,157600,"['pop', 'post-teen pop', 'talent show', 'uk pop']",1930
 Where Or When,Dion & The Belmonts,The Best Of Dion & The Belmonts,157800,"['latin', 'panamanian pop', 'reggaeton', 'trap latino']",1930
 Running Bear,Johnny Preston,Running Bear,157842,"['brostep', 'complextro', 'edm', 'electro', 'pop dance']",1930
-"I Can Dream, Can't I?",The Andrews Sisters,My Greatest Songs,158000,"['atl hip hop', 'hip hop', 'pop rap', 'rap']",1930
+I Can Dream Can't I?,The Andrews Sisters,My Greatest Songs,158000,"['atl hip hop', 'hip hop', 'pop rap', 'rap']",1930
 Sixteen Tons,Tennessee Ernie Ford,Vintage Collections,158307,"['k-pop', 'k-pop boy group']",1930
 A Million to One,Jimmy Charles,A Million to One,158433,"['electro', 'filter house']",1930
 Money (That's What I Want) - Single Version / Mono,Barrett Strong,The Collection,158493,"['emo rap', 'miami hip hop', 'rap', 'trap']",1930
 Puttin' On The Ritz,Various Artists,Top Hits Of The 1930s,158773,"['boy band', 'latin', 'latin pop', 'reggaeton']",1930
 I Love the Way You Love,Marv Johnson,Marv Johnson 25 Original Tracks (Remastered),158947,"['dance pop', 'neo mellow', 'pop', 'pop rock', 'post-teen pop', 'talent show', 'urban contemporary']",1930
-"A Tisket, A Tasket",Various Artists,Top Hits Of The 1930s,158960,"['alternative r&b', 'hip hop', 'lgbtq+ hip hop', 'neo soul', 'pop']",1930
+A Tisket A Tasket,Various Artists,Top Hits Of The 1930s,158960,"['alternative r&b', 'hip hop', 'lgbtq+ hip hop', 'neo soul', 'pop']",1930
 It's All In The Game,Tommy Edwards,It’s All In The Game: The Best Of Tommy Edwards,159040,"['dance pop', 'pop', 'post-teen pop']",1930
 New San Antonio Rose,Bob Wills & His Texas Playboys,American Roots Music (Remastered),159093,"['pop', 'uk pop']",1930
 Top Hat White Tie And Tails,Various Artists,Top Hits Of The 1930s,159133,"['latin hip hop', 'mexican hip hop']",1930
@@ -153,7 +153,7 @@ Stairway to Heaven - Remastered,Neil Sedaka,The Very Best Of Neil Sedaka,159773,
 Ol' Man River,Paul Robeson,Paul Robeson,159800,"['edm', 'pop', 'pop dance', 'tropical house']",1930
 If I Knew You Were Comin' I'd've Baked a Cake,Eileen Barton,If I Knew You Were Comin'...,159840,"['dance pop', 'edm', 'electronic trap', 'pop', 'pop dance']",1930
 White Silver Sands,Bill Blacks Combo,White Silver Sands,159843,"['colombian pop', 'latin', 'latin pop', 'reggaeton', 'reggaeton colombiano', 'trap latino', 'tropical']",1930
-"I Want You, I Need You, I Love You",Elvis Presley,Elvis' Golden Records,159920,"['dance pop', 'pop', 'post-teen pop', 'viral pop']",1930
+I Want You I Need You I Love You,Elvis Presley,Elvis' Golden Records,159920,"['dance pop', 'pop', 'post-teen pop', 'viral pop']",1930
 The Way You Look Tonight,Various Artists,Top Hits Of The 1930s,160067,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1930
 In My Little Corner Of The World,Anita Bryant,The Very Best Of,160080,"['alternative metal', 'nu metal', 'rap metal']",1930
 I Will Move On Up A Little Higher - Part 1,Mahalia Jackson,The Essential Mahalia Jackson,160293,"['dance pop', 'pop', 'post-teen pop']",1930
@@ -166,7 +166,7 @@ Don't Let The Stars Get In Your Eyes,Perry Como,Pure Gold,160773,"['glam rock', 
 Nature Boy,Various Artists,100 Love Songs & Love Ballads - Classic Lovesongs from the Greatest Legends (Valentines Edition),161080,"['florida rap', 'hip hop', 'melodic rap', 'miami hip hop', 'rap', 'southern hip hop', 'trap']",1930
 April Love,Pat Boone,Pat Boone's Greatest Hits (Reissue),161200,"['colombian pop', 'latin', 'latin pop', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1930
 I Can't Be Satisfied,Various Artists,"The Best of Chess Records Original Artist Recordings Of Songs In The Film ""Cadillac Records""",161347,['alternative hip hop'],1930
-"Love Me Tender - From the 20th Century-Fox CinemaScope Production, ""Love Me Tender""",Elvis Presley,Elvis' Golden Records,161360,"['g funk', 'gangster rap', 'hip hop', 'pop rap', 'rap', 'west coast rap']",1930
+"Love Me Tender - From the 20th Century-Fox CinemaScope Production ""Love Me Tender""",Elvis Presley,Elvis' Golden Records,161360,"['g funk', 'gangster rap', 'hip hop', 'pop rap', 'rap', 'west coast rap']",1930
 Lost Highway,Hank Williams,Masterpieces: Hank Williams,161653,"['atl hip hop', 'atl trap', 'rap', 'trap']",1930
 Alley Oop,The Hollywood Argyles,Alley Oop - The Very Best Of,161733,"['bolero', 'latin', 'latin pop']",1930
 Dancing Machine,The Jackson 5,Dancing Machine,161813,"['emo rap', 'lgbtq+ hip hop']",1930
@@ -248,7 +248,7 @@ Indian Reservation (The Lament of the Cherokee Reservation Indian),Paul Revere &
 One Hell Of A Woman,Mac Davis,Stop And Smell The Roses,171960,"['australian hip hop', 'dance pop', 'hip pop', 'pop', 'pop rap', 'post-teen pop']",1940
 Down By the Station,The Four Preps,Down By the Station,172067,"['complextro', 'dance pop', 'edm', 'electro house', 'electropop', 'german techno', 'pop', 'pop dance', 'post-teen pop', 'tropical house']",1940
 You're Getting To Be A Habit With Me,Various Artists,Top Hits Of The 1930s,172160,"['latin', 'latin pop', 'modern salsa', 'salsa', 'tropical']",1940
-"Music, Music, Music",Teresa Brewer,"Music, Music, Music",172173,"['adult standards', 'rock-and-roll', 'rockabilly']",1940
+Music Music Music,Teresa Brewer,"Music, Music, Music",172173,"['adult standards', 'rock-and-roll', 'rockabilly']",1940
 Beyond the Sea,Bobby Darin,That's All,172480,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1940
 Stay With Me,Sam Smith,In The Lonely Hour,172724,"['hip hop', 'pop rap', 'rap']",1940
 La Bamba,Los Lobos,Just Another Band From East L.A.: A Collection,172733,"['conscious hip hop', 'dmv rap', 'hip hop', 'pop rap', 'rap']",1940
@@ -289,7 +289,7 @@ St. Louis Blues - Vocal,Louis Armstrong,The Essential Louis Armstrong,177893,"['
 Tell Laura I Love Her,Ray Peterson,Goodnight My Love,178093,"['australian psych', 'neo-psychedelic']",1940
 Opus One - 1991 Remastered,Tommy Dorsey,Greatest Hits,178160,"['kentucky hip hop', 'pop', 'pop rap', 'r&b', 'rap', 'trap']",1940
 Rock And Roll Waltz,Kay Starr,Good Music Book,178285,"['hip hop', 'indie pop rap', 'oakland hip hop', 'pop rap', 'rap']",1940
-"Stealin', Stealin' - Remastered 2002",Memphis Jug Band,American Epic: The Best of Memphis Jug Band,178440,"['funk carioca', 'pop nacional', 'sertanejo', 'sertanejo pop', 'sertanejo universitario']",1940
+Stealin' Stealin' - Remastered 2002,Memphis Jug Band,American Epic: The Best of Memphis Jug Band,178440,"['funk carioca', 'pop nacional', 'sertanejo', 'sertanejo pop', 'sertanejo universitario']",1940
 It's Too Soon to Know,Various Artists,American Rock 'n Roll History,178507,"['latin', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1940
 I Feel the Earth Move,Carole King,Tapestry,178560,"['k-pop', 'k-pop boy group']",1940
 What A Difference A Day Made,Various Artists,Top Hits Of The 1930s,178600,"['banda', 'corrido', 'norteno', 'nuevo regional mexicano', 'regional mexican', 'sierreno']",1940
@@ -324,7 +324,7 @@ Call It Stormy Monday (But Tuesday Is Just As Bad),Blues,Platinum Masters,181880
 Boplicity,Miles Davis,Birth Of The Cool,181989,"['contemporary country', 'country', 'country dawn', 'country road', 'oklahoma country', 'post-teen pop']",1950
 It Had To Be You,Various Artists,No. 1 Chart Toppers of the 1920s Original Recordings Vol.1,182000,"['mpb', 'nova mpb', 'pop nacional']",1950
 Singin' The Blues,Bix Beiderbecke And Frankie Trumbauer,Bix And Tram,182227,"['adult standards', 'canadian pop', 'jazz pop', 'lounge']",1950
-"Bad, Bad Leroy Brown",Jim Croce,Life & Times,182240,"['contemporary country', 'country', 'country road']",1950
+Bad Bad Leroy Brown,Jim Croce,Life & Times,182240,"['contemporary country', 'country', 'country road']",1950
 I Don't Know Why,Various Artists,Top Hits Of The 1930s,182467,"['bachata', 'bachata dominicana', 'latin', 'latin hip hop', 'latin pop', 'trap latino', 'tropical']",1950
 Dancing in the Dark,Various Artists,Top Hits Of The 1930s,182467,['glam rock'],1950
 Band Of Gold - Re-Record,Freda Payne,Band Of Gold (Remix),182533,['k-rap'],1950
@@ -347,7 +347,7 @@ I'm Walking Behind You - 2001 Remastered,Eddie Fisher,Greatest Hits,184400,"['k-
 Apologize,Timbaland,Shock Value,184400,"['disco', 'mellow gold', 'soft rock']",1950
 Raindrops Keep Fallin' On My Head,B.J. Thomas,Raindrops Keep Fallin' On My Head,184493,"['italian hip hop', 'italian pop', 'trap italiana']",1950
 It's Tight Like That,Various Artists,Tampa Red,184627,"['dance pop', 'edm', 'pop', 'pop dance', 'post-teen pop', 'tropical house', 'uk dance', 'uk funky']",1950
-"Evergreen (Love Theme from, ""A Star Is Born"")",Barbra Streisand,A Star Is Born,184800,"['latin', 'latin pop', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1950
+"Evergreen (Love Theme from ""A Star Is Born"")",Barbra Streisand,A Star Is Born,184800,"['latin', 'latin pop', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1950
 A Night In Tunisia,Dizzy Gillespie,Best of Dizzy Gillespie,184924,"['contemporary country', 'country', 'country pop', 'country road', 'modern country rock']",1950
 Wanted (with Henri René & His Orchestra and Chorus),Perry Como,The Definitive Collection,184933,"['folk-pop', 'modern rock', 'pop', 'stomp and holler']",1950
 When The Moon Comes Over The Mountain,Various Artists,Top Hits Of The 1930s,185000,"['brazilian rock', 'mpb', 'rock brasiliense', 'rock nacional brasileiro']",1950
@@ -366,7 +366,7 @@ Frenesi,Artie Shaw,"Gloomy Sunday (The Bluebird Recordings in Chronological Orde
 The Song Is You,Various Artists,Top Hits Of The 1930s,186133,"['album rock', 'art rock', 'beatlesque', 'classic rock', 'folk rock', 'mellow gold', 'rock']",1950
 Body And Soul,Various Artists,Top Hits Of The 1930s,186267,"['electropop', 'pop', 'pop rap']",1950
 Heart Attack,Olivia Newton-John,20th Century Masters: The Millennium Collection: Best Of Olivia Newton-John,186400,"['latin', 'latin arena pop', 'latin pop', 'mariachi', 'mexican pop', 'ranchera', 'regional mexican']",1950
-"Rudolph, the Red-Nosed Reindeer (with The Pinafores)",Gene Autry,A Gene Autry Christmas,186427,"['banda', 'corrido', 'ranchera', 'regional mexican']",1950
+Rudolph the Red-Nosed Reindeer (with The Pinafores),Gene Autry,A Gene Autry Christmas,186427,"['banda', 'corrido', 'ranchera', 'regional mexican']",1950
 Love Walked In,Various Artists,Top Hits Of The 1930s,186507,"['new jersey rap', 'pop rap', 'rap', 'southern hip hop', 'trap']",1950
 Don't Fence Me In,Various Artists,The Hits Of The 30's & 40's,186600,"['desi hip hop', 'filmi', 'tamil hip hop']",1950
 Rudolph the Red-Nosed Reindeer,Gene Autry,Rudolph The Red Nosed Reindeer And Other Christmas Classics,186733,"['classical', 'classical era']",1950
@@ -396,7 +396,7 @@ I'm Coming Virginia,Bix Beiderbecke,"Bix Beiderbecke, Volume I: Singin' The Blue
 It Had To Be You,Various Artists,Jazz Hits of The Early 40's Vol 6,189600,"['latin', 'latin hip hop', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1950
 Cherry Pink And Apple Blossom White,Pérez Prado,Mambo No 5,189640,"['atl hip hop', 'dirty south rap', 'gangster rap', 'hip hop', 'pop rap', 'rap', 'southern hip hop', 'trap']",1950
 Body And Soul,Various Artists,Top Hits Of The 1930s,190000,"['alternative metal', 'modern rock', 'nu metal', 'rap metal', 'rap rock']",1950
-"Take Me Home, Country Roads",John Denver,"Poems, Prayers and Promises",190160,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1950
+Take Me Home Country Roads,John Denver,"Poems, Prayers and Promises",190160,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1950
 I Saw Stars,Various Artists,Top Hits Of The 1930s,190173,"['latin', 'latin hip hop', 'reggaeton', 'reggaeton colombiano', 'reggaeton flow', 'trap latino', 'tropical']",1950
 Royals,Lorde,Pure Heroine,190185,"['contemporary country', 'country', 'country road', 'modern country rock']",1950
 Sally,Various Artists,Top Hits Of The 1930s,190493,"['grupera', 'latin', 'latin pop', 'ranchera', 'regional mexican']",1960
@@ -404,9 +404,9 @@ Wildwood Flower,A. P. Carter,The Carter Family 1927 - 1934 Disc A,190507,"['funk
 Mon Homme,Various Artists,Paris Est Toujours Paris!,190667,"['dance pop', 'escape room', 'minnesota hip hop', 'pop', 'pop rap', 'post-teen pop', 'trap queen']",1960
 St Louis Blues,Bessie Smith,The Anthology,190720,"['indonesian alternative rock', 'indonesian indie', 'indonesian pop']",1960
 Gloomy Sunday (with Teddy Wilson & His Orchestra) - Take 1,Billie Holiday,Lady Day: The Complete Billie Holiday On Columbia (1933-1944),190800,"['pop', 'pop rap', 'r&b', 'southern hip hop', 'trap', 'trap soul']",1960
-"Bye-Bye, Blackbird (1926)",Gene Austin,A Retrospective Gene Austin,190893,"['j-pop', 'j-poprock', 'j-rock', 'japanese emo', 'visual kei']",1960
+Bye-Bye Blackbird (1926),Gene Austin,A Retrospective Gene Austin,190893,"['j-pop', 'j-poprock', 'j-rock', 'japanese emo', 'visual kei']",1960
 The Sign,Ace of Base,The Sign,191240,"['latin', 'latin hip hop', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1960
-"California, Here I Come (1924)",Al Jolson,"In The '20s, In The '40s",191467,"['francoton', 'rap marseille']",1960
+California Here I Come (1924),Al Jolson,"In The '20s, In The '40s",191467,"['francoton', 'rap marseille']",1960
 Round Midnight,Various Artists,Amy Winehouse's Jukebox,191480,"['alt z', 'dance pop', 'electropop', 'pop', 'post-teen pop']",1960
 Flying Home,Lionel Hampton,Jukebox Hits 1943-1950,191693,"['alternative rock', 'garage rock', 'indie rock', 'modern rock', 'permanent wave', 'rock']",1960
 Tight Like This,Louis Armstrong,The Complete Hot Five & Hot Seven Recordings,191733,"['batidao romantico', 'funk carioca', 'funk ostentacao', 'funk paulista']",1960
@@ -453,7 +453,7 @@ Rhinestone Cowboy,Glen Campbell,Rhinestone Cowboy (Expanded Edition),194453,"['b
 As Time Goes By,Various Artists,Top Hits Of The 1930s,194800,"['album rock', 'art rock', 'beatlesque', 'classic rock', 'mellow gold', 'rock', 'soft rock']",1960
 Mona Lisa,Nat King Cole,Unforgettable,194987,"['alt z', 'dance pop', 'electropop', 'pop', 'post-teen pop', 'viral pop']",1960
 Jump,Kris Kross,Totally Krossed Out,195107,"['alternative metal', 'nu metal', 'post-grunge']",1960
-"Baby, You Got What It Takes",Various Artists,The Cruisin Story 1960,195279,"['alternative rock', 'blues rock', 'garage rock', 'modern alternative rock', 'modern blues rock', 'modern rock', 'punk blues', 'rock']",1960
+Baby You Got What It Takes,Various Artists,The Cruisin Story 1960,195279,"['alternative rock', 'blues rock', 'garage rock', 'modern alternative rock', 'modern blues rock', 'modern rock', 'punk blues', 'rock']",1960
 Four Brothers,Woody Herman & His Orchestra,Blowin' Up A Storm: The Columbia Years 1945-1947,195400,"['sertanejo', 'sertanejo pop', 'sertanejo universitario']",1960
 Driftin' Blues - 1992 Digital Remaster,Charles Brown,The Best Of Charles Brown: Driftin' Blues,195400,"['folk-pop', 'modern rock', 'neo mellow', 'neo-singer-songwriter', 'pop', 'pop rock']",1960
 Joy To The World - Single Version,Three Dog Night,Three Dog Night - The Complete Hit Singles,195533,"['colombian pop', 'latin', 'latin pop', 'r&b en espanol', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1960
@@ -474,7 +474,7 @@ Dinah,Various Artists,Speakeasy Music of the 1920's,196840,"['dance pop', 'hip h
 Mad About The Boy,Various Artists,Top Hits Of The 1930s,197000,"['classic rock', 'folk', 'folk rock', 'melancholia', 'mellow gold', 'rock']",1960
 I'm Confessing That I Love You,Various Artists,Top Hits Of The 1930s,197093,"['gangster rap', 'hip hop', 'pop rap', 'rap', 'southern hip hop', 'trap']",1960
 Concerto for Cootie - 1999 Remastered,Duke Ellington,Jazz Indispensable,197107,"['album rock', 'blues rock', 'classic rock', 'country rock', 'hard rock', 'mellow gold', 'rock', 'soft rock', 'southern rock']",1960
-"December, 1963 (Oh What a Night!)",Frankie Valli & The Four Seasons,Who Loves You,197147,['turkish folk'],1960
+December 1963 (Oh What a Night!),Frankie Valli & The Four Seasons,Who Loves You,197147,['turkish folk'],1960
 From The Top Of Your Head,Various Artists,Top Hits Of The 1930s,197267,"['latin', 'r&b en espanol', 'reggaeton', 'trap latino']",1960
 Nuages - avec le Quintette Hot Club de France,Django Reinhardt,The Best Of Django Reinhardt,197280,"['dance pop', 'pop', 'post-teen pop', 'social media pop']",1960
 The Streak,Ray Stevens,Greatest Hits - Original Recordings,197733,"['k-pop', 'k-pop boy group']",1960
@@ -485,7 +485,7 @@ In the Jailhouse Now,Jimmie Rodgers,The Essential Jimmie Rodgers,198067,"['dance
 Now's The Time,Charlie Parker,The Essential Charlie Parker,198280,"['contemporary country', 'country', 'country road']",1960
 Artistry In Rhythm,Stan Kenton,The Best Of Stan Kenton,198360,"['album rock', 'alternative metal', 'hard rock', 'melodic thrash', 'metal', 'old school thrash', 'rock', 'speed metal', 'thrash metal']",1960
 Dead Man Blues,Jelly Roll Morton,Jelly Roll Blues,198400,"['funk carioca', 'funk ostentacao']",1960
-"Dark Was the Night, Cold Was the Ground",Blind Willie Johnson,Dark Was The Night (Mojo Workin'- Blues For The Next Generation),198560,"['funk carioca', 'funk consciente', 'funk ostentacao', 'funk paulista']",1960
+Dark Was the Night Cold Was the Ground,Blind Willie Johnson,Dark Was The Night (Mojo Workin'- Blues For The Next Generation),198560,"['funk carioca', 'funk consciente', 'funk ostentacao', 'funk paulista']",1960
 Someone to Watch Over Me - 78rpm Version,Frank Sinatra,The Essential Frank Sinatra,198800,"['dance pop', 'latin', 'latin pop', 'mexican pop']",1960
 Physical (Glee Cast Version) (feat. Olivia Newton-John),Glee Cast,"Glee: The Music, Volume 3 Showstoppers",198907,"['alternative metal', 'alternative rock', 'grunge', 'permanent wave', 'pop rock', 'rock']",1960
 See See Rider Blues - Remastered,Ma Rainey,Blues Legends: Ma Rainey,199120,"['dirty south rap', 'gangster rap', 'hip hop', 'memphis hip hop', 'pop rap', 'rap', 'southern hip hop', 'tennessee hip hop', 'trap']",1960
@@ -529,7 +529,7 @@ Sweet and Lovely,Various Artists,Top Hits Of The 1930s,203067,"['sertanejo', 'se
 Pine Top's Boogie Woogie,Various Artists,"Shake Your Wicked Knees: Classic Piano Rags, Blues & Stomps 1928 - 43",203200,"['atl hip hop', 'melodic rap', 'rap', 'trap']",1970
 Black and Tan Fantasy,Duke Ellington,The Essential Duke Ellington,203373,"['g funk', 'gangster rap', 'hardcore hip hop', 'hip hop', 'rap', 'west coast rap']",1970
 Les feuilles mortes,Yves Montand,Yves Montand - Les feuilles mortes,203382,"['latin', 'latin pop', 'pop venezolano', 'reggaeton', 'trap latino']",1970
-"One, Two Step (feat. Missy Elliott)",Ciara,Goodies,203787,"['dance pop', 'edm', 'electro house', 'pop', 'pop dance', 'tropical house']",1970
+One Two Step (feat. Missy Elliott),Ciara,Goodies,203787,"['dance pop', 'edm', 'electro house', 'pop', 'pop dance', 'tropical house']",1970
 Frankie,Mississippi John Hurt,Frankie got the blues,204000,"['dance pop', 'gangster rap', 'hip hop', 'pop', 'pop rap', 'r&b', 'rap', 'southern hip hop', 'trap', 'urban contemporary']",1970
 Timber (feat. Ke$ha),Pitbull,Global Warming: Meltdown (Deluxe Version),204160,['arabesk'],1970
 Blue Yodel #1 (t For Texas),Jimmie Rodgers,The Very Best Of,204200,['soft rock'],1970
@@ -640,7 +640,7 @@ Rock with You - Single Version,Michael Jackson,Off the Wall,220627,"['madchester
 Footloose,Kenny Loggins,"Yesterday, Today, Tomorrow - The Greatest Hits Of Kenny Loggins",220707,"['argentine rock', 'argentine telepop', 'folklore argentino', 'pop argentino']",1980
 Ebony And Ivory,Paul McCartney,All The Best,220773,"['contemporary country', 'country', 'country road', 'modern country rock']",1980
 DJ Got Us Fallin' In Love (feat. Pitbull),Usher,Raymond v Raymond (Expanded Edition),220800,"['canadian contemporary r&b', 'pop', 'r&b']",1980
-"Independent Women, Pt. 1",Destiny's Child,Survivor,221133,"['alt z', 'electropop', 'pop']",1980
+Independent Women Pt. 1,Destiny's Child,Survivor,221133,"['alt z', 'electropop', 'pop']",1980
 Wrecking Ball,Miley Cyrus,Bangerz (Deluxe Version),221360,"['dance pop', 'hip pop', 'neo soul', 'new jack swing', 'quiet storm', 'r&b', 'urban contemporary']",1980
 Would You Like to Take a Walk?,Various Artists,Top Hits Of The 1930s,221533,"['canadian electronic', 'edm', 'electro house', 'pop dance', 'progressive house']",1980
 Crank That (Soulja Boy),Soulja Boy,souljaboytellem.com,221933,"['dance pop', 'hip hop', 'hip pop', 'neo soul', 'pop', 'pop rap', 'r&b', 'urban contemporary']",1980
@@ -665,7 +665,7 @@ Delicado,Percy Faith,The Minute Samba,226326,"['banda', 'corrido', 'nuevo region
 What's Love Got to Do with It,Tina Turner,What's Love Got to Do with It?,226880,"['dance pop', 'electropop', 'metropopolis', 'pop', 'post-teen pop', 'uk alternative pop']",1980
 Again,Janet Jackson,Janet,227133,"['spanish pop', 'spanish pop rock']",1980
 How Do You Talk To An Angel?,The Heights,The Heights,227267,"['latin', 'latin arena pop', 'latin pop', 'mexican pop']",1980
-"All I Do Is Win (feat. T-Pain, Ludacris, Snoop Dogg & Rick Ross)",DJ Khaled,Victory,227293,"['latin pop', 'pop argentino']",1980
+All I Do Is Win (feat. T-Pain Ludacris Snoop Dogg & Rick Ross),DJ Khaled,Victory,227293,"['latin pop', 'pop argentino']",1980
 Foolish,Ashanti,Ashanti,227387,"['canadian latin', 'canadian pop', 'dance pop', 'pop', 'pop rap']",1980
 It Wasn't Me,Shaggy,The Boombastic Collection - Best of Shaggy,227547,"['crunk', 'dirty south rap', 'gangster rap', 'hip hop', 'memphis hip hop', 'pop rap', 'rap', 'southern hip hop', 'trap']",1980
 Teenage Dream,Katy Perry,Katy Perry - Teenage Dream: The Complete Confection,227760,"['adult standards', 'contemporary vocal jazz', 'jazz pop', 'neo mellow', 'vocal jazz']",1980
@@ -730,16 +730,16 @@ Mama,Connie Francis,Sings Italian Favorites,237867,"['detroit hip hop', 'detroit
 (Just Like) Starting Over - Remastered 2010,John Lennon,Gimme Some Truth,238000,"['atl hip hop', 'hip hop', 'pop rap', 'rap', 'southern hip hop', 'trap']",1990
 Disturbia,Rihanna,Good Girl Gone Bad: Reloaded,238627,"['latin', 'latin hip hop', 'rap boricua', 'reggaeton', 'trap latino', 'tropical']",1990
 Here Without You,3 Doors Down,Away From The Sun,238733,"['filmi', 'kollywood', 'tamil pop']",1990
-"Another Brick in the Wall, Pt. 2",Pink Floyd,The Wall,238747,"['chicago hardcore', 'chicago punk', 'hardcore punk', 'pop punk', 'punk']",1990
+Another Brick in the Wall Pt. 2,Pink Floyd,The Wall,238747,"['chicago hardcore', 'chicago punk', 'hardcore punk', 'pop punk', 'punk']",1990
 This Is How We Do It,Montell Jordan,This Is How We Do It,238800,"['italian adult pop', 'italian pop']",1990
 Funkytown,Various Artists,Casablanca Records Greatest Hits,239227,"['conscious hip hop', 'east coast hip hop', 'gangster rap', 'hardcore hip hop', 'hip hop', 'queens hip hop', 'rap']",1990
 Jump,Van Halen,Best of Volume 1,239560,"['francoton', 'french hip hop', 'pop urbaine', 'rap algerien', 'rap tunisien']",1990
 Pumped Up Kicks,Foster The People,Torches,239600,"['canadian singer-songwriter', 'folk', 'folk rock', 'melancholia', 'permanent wave', 'singer-songwriter']",1990
 Look Away,Chicago,Love Songs,240653,"['latin', 'latin alternative', 'latin pop', 'latin rock', 'mexican pop', 'rock en espanol', 'spanish rock']",1990
 Ghostbusters,Ray Parker Jr.,Arista Heritage Series: Ray Parker,240800,"['album rock', 'glam metal', 'hard rock', 'rock']",1990
-"Say You, Say Me",Lionel Richie,Dancing On The Ceiling,241067,"['alternative metal', 'melodic metalcore', 'metalcore', 'nu metal', 'pop punk', 'uk metalcore', 'welsh metal']",1990
+Say You Say Me,Lionel Richie,Dancing On The Ceiling,241067,"['alternative metal', 'melodic metalcore', 'metalcore', 'nu metal', 'pop punk', 'uk metalcore', 'welsh metal']",1990
 Ain't Misbehavin,Fats Waller,1934-1943 - Ain't Misbehavin,241427,"['art pop', 'candy pop', 'dance pop', 'electropop', 'escape room', 'hyperpop', 'metropopolis', 'pop', 'post-teen pop', 'uk pop']",1990
-"Oh, Lady Be Good",Ella Fitzgerald,Ella Fitzgerald Sings The George And Ira Gershwin Song Book (Expanded Edition),241533,"['latin christian', 'rock cristiano']",1990
+Oh Lady Be Good,Ella Fitzgerald,Ella Fitzgerald Sings The George And Ira Gershwin Song Book (Expanded Edition),241533,"['latin christian', 'rock cristiano']",1990
 Take Me To Church,Hozier,Hozier,241688,"['latin', 'latin hip hop', 'perreo', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1990
 (Your Love Has Lifted Me) Higher And Higher,Rita Coolidge,Anytime... Anywhere,241720,"['desi pop', 'modern bollywood']",1990
 Gangsta's Paradise (feat. L.V.),Coolio,Gangsta's Paradise (US Release),241933,"['alternative rock', 'modern power pop', 'modern rock', 'permanent wave', 'pop rock', 'rock']",1990
@@ -793,7 +793,7 @@ Hello,Lionel Richie,Can't Slow Down,251107,"['funk carioca', 'sertanejo', 'serta
 All The Man That I Need,Whitney Houston,I'm Your Baby Tonight,251427,"['latin', 'latin pop', 'mariachi', 'ranchera']",1990
 Boom Boom Pow,Black Eyed Peas,THE E.N.D. (THE ENERGY NEVER DIES),251440,"['classic italian pop', 'italian adult pop']",1990
 Everybody Wants To Rule The World,Tears For Fears,Songs From The Big Chair (Super Deluxe Edition),251489,"['brazilian rock', 'mpb', 'pop rock brasileiro', 'rock brasiliense', 'rock nacional brasileiro']",1990
-"Give Me Everything (feat. Ne-Yo, Afrojack & Nayer)",Pitbull,Planet Pit (Deluxe Version),252307,"['alternative metal', 'nu metal', 'post-grunge', 'rap metal']",1990
+Give Me Everything (feat. Ne-Yo Afrojack & Nayer),Pitbull,Planet Pit (Deluxe Version),252307,"['alternative metal', 'nu metal', 'post-grunge', 'rap metal']",1990
 Miss You Much,Janet Jackson,Rhythm Nation 1814,252333,"['neo mellow', 'piano rock', 'pop rock', 'rock']",1990
 "Love Me Like You Do - From ""Fifty Shades Of Grey""",Ellie Goulding,Delirium (Deluxe),252534,"['hard rock', 'rock']",1990
 Let Her Go,Passenger,All The Little Lights,252867,"['alternative dance', 'indie rock', 'indietronica', 'modern rock', 'rock']",1990
@@ -809,7 +809,7 @@ Latch,Disclosure,Settle (Deluxe Version),255632,"['desi pop', 'filmi', 'modern b
 The First Time,Surface,The First Time: The Best Of Surface,256000,"['adoracao', 'brazilian gospel', 'rock gospel brasileiro']",2000
 Bump n' Grind,R. Kelly,12 Play,256133,"['album rock', 'art rock', 'classic rock', 'glam rock', 'mellow gold', 'piano rock', 'progressive rock', 'rock', 'soft rock']",2000
 Bent,Matchbox Twenty,Mad Season,256133,['pagode'],2000
-"That's What Friends Are For (with Elton John, Gladys Knight & Stevie Wonder)",Dionne Warwick,Greatest Hits 1979-1990,256467,"['australian dance', 'australian electropop', 'australian indie', 'downtempo', 'edm']",2000
+That's What Friends Are For (with Elton John Gladys Knight & Stevie Wonder),Dionne Warwick,Greatest Hits 1979-1990,256467,"['australian dance', 'australian electropop', 'australian indie', 'downtempo', 'edm']",2000
 Do That To Me One More Time,Captain & Tennille,Make Your Move,256667,"['emo rap', 'underground hip hop']",2000
 Let Me Love You,Mario,Let Me Love You,256733,['k-pop'],2000
 Everything You Want,Vertical Horizon,Everything You Want,257067,"['permanent wave', 'soft rock', 'sophisti-pop']",2000
@@ -844,7 +844,7 @@ Joyride,Roxette,Joyride (Deluxe Version),263093,"['desi pop', 'filmi', 'modern b
 Work It,Missy Elliott,Under Construction,263227,"['dance pop', 'neo mellow', 'pop', 'pop rock', 'post-teen pop', 'viral pop']",2000
 Love The Way You Lie,Eminem,Recovery,263373,"['boy band', 'new jack swing', 'quiet storm', 'r&b', 'urban contemporary']",2000
 Blurred Lines,Robin Thicke,Blurred Lines (Deluxe),263827,"['cool jazz', 'hard bop', 'jazz', 'jazz fusion', 'jazz trumpet']",2000
-"I'll Be There (feat. Trey Lorenz) - Live at MTV Unplugged, Kaufman Astoria StuLive at MTV Unplugged, Kaufman Astoria Studios, New York - March 1992dios, New York - March 1992",Mariah Carey,#1 to Infinity,264240,"['sertanejo', 'sertanejo pop', 'sertanejo universitario']",2000
+I'll Be There (feat. Trey Lorenz) - Live at MTV Unplugged Kaufman Astoria StuLive at MTV Unplugged Kaufman Astoria Studios New York - March 1992dios New York - March 1992,Mariah Carey,#1 to Infinity,264240,"['sertanejo', 'sertanejo pop', 'sertanejo universitario']",2000
 Right Here Waiting,Richard Marx,Repeat Offender,264333,"['afrofuturism', 'hip hop', 'neo soul', 'r&b', 'soul', 'urban contemporary']",2000
 That's The Way Love Goes,Janet Jackson,Janet,265107,"['dance pop', 'miami hip hop', 'pop', 'post-teen pop', 'urban contemporary']",2000
 Opposites Attract,Paula Abdul,Forever Your Girl,265373,['german pop'],2000
@@ -997,4 +997,4 @@ Rhapsody In Blue,Various Artists,Greatest Hits Of The 20's,539977,"['arab pop', 
 Swing To Bop,Charlie Christian,Immortal Charlie Christian - Guest Artist,540200,"['atl hip hop', 'crunk', 'dirty south rap', 'gangster rap', 'hip hop', 'pop rap', 'rap', 'southern hip hop', 'trap']",2010
 Misterioso - Live,Thelonious Monk,Misterioso,653840,"['album rock', 'beatlesque', 'classic rock', 'folk rock', 'mellow gold', 'psychedelic rock', 'rock', 'roots rock', 'soft rock']",2010
 Get Ready,Rare Earth,Get Ready,1292293,"['latin', 'latin arena pop', 'latin pop']",2010
-"Black (First Movement Of Black, Brown And Beige) - Live",Duke Ellington,"The Duke Elington Carnegie Hall Concerts, January 1943",1312960,"['dance pop', 'europop', 'new wave pop', 'soft rock', 'urban contemporary']",2010
+Black (First Movement Of Black Brown And Beige) - Live,Duke Ellington,"The Duke Elington Carnegie Hall Concerts, January 1943",1312960,"['dance pop', 'europop', 'new wave pop', 'soft rock', 'urban contemporary']",2010
