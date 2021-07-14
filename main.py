@@ -23,4 +23,14 @@ def main():
         print("Incorrect choice")
         quit()
 
+    if user != '':
+        while True:
+            print("Hello" + user)
+            print("Select one of the following options")
+            print("1: Collections submenu")
+            print("2: Find songs")
+            print("3: Find Users")
+    
+
+
 main()
