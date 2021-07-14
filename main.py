@@ -2,35 +2,44 @@ from src.cli import *
 
 
 def main():
-    user = ''
+    current_user = ''
     print("Welcome to Potify")
     print("Select one of the following options")
     print("1: Login to account")
     print("2: Create new account")
     print("3: Close cli")
-    print("4: show all tables")
     choice = int(input())
 
     if choice == 1:
-        user = login()
+        current_user = login()
     elif choice == 2:
-        user = signup()
+        current_user = signup()
     elif choice == 3:
         quit()
-    elif choice == 4:
-        show()
     else:
         print("Incorrect choice")
         quit()
 
-    if user != '':
+    if current_user != '':
+        print("Welcome Back " + current_user)
         while True:
-            print("Hello" + user)
             print("Select one of the following options")
-            print("1: Collections submenu")
-            print("2: Find songs")
-            print("3: Find Users")
-    
+            print("1: Find songs")
+            print("2: Find Users")
+            print("3: Collections submenu")
+            print("4: quit")
+            choice = int(input())
+            if choice == 1:
+                print("temp")
+            elif choice == 2:
+                searchUser(current_user)
+            elif choice == 3:
+                print("temp")
+            elif choice == 4:
+                quit()
+            else:
+                print("Incorrect choice")
+                quit()
 
 
 main()
