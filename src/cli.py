@@ -243,6 +243,22 @@ def searchUser(current_user):
                 if select == '1':
                     cursor.execute('DELETE FROM "friends" WHERE  "user"=%s AND follows=%s', (current_user, found_user[0]))
                     connection.commit()
-                    print("You are no longer following" + found_user[0])
+                    print("You are no longer following " + found_user[0])
     connection.close()
     print("Returning to options select")
+
+
+
+def searchSong():
+    return
+    
+
+def populateTestData():
+    sql_query = os.path.join(os.path.dirname(__file__), f'sample_queries.sql')
+    connection = connect()
+    cursor = connection.cursor()
+    with open(sql_query, 'r') as file:
+        cursor.execute(file.read())
+    connection.commit()
+    connection.close()
+
