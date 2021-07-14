@@ -21,9 +21,9 @@ def add_to_collection():
                 cursor.execute('INSERT INTO "collection-song"(Collection_num, song_num) VALUES (1, 2)')
                 connection.commit()
             else:
-                print("The specified song was not found")
+                print("The specified song was not found.")
         else:
-            print("The specified collection was not found")
+            print("The specified collection was not found.")
     connection.close()
 
 
