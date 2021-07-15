@@ -2,6 +2,7 @@ from src.cli import *
 
 
 def main():
+    #csv_import("top1000_songs.csv")
     populateTestData()
     current_user = ''
     print("Welcome to Potify")
