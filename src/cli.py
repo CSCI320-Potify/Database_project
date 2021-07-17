@@ -37,7 +37,10 @@ def create_collection(user):
     exists = cursor.fetchone()[0]
     if exists == 0:
         cursor.execute('SELECT MAX(collection_num) FROM "collection"')
-        new_num = cursor.fetchone()[0] + 1
+        if cursor.fetchone()[0] is None: #if user has no collections, collection id is starting from 0
+            new_num = 0
+        else: # if user already has a collection
+            new_num = cursor.fetchone()[0] + 1
         cursor.execute('INSERT INTO "collection" VALUES (%s, %s, %s, %s, %s)', (collect, new_num, "0", "0", user))
         connection.commit()
         print("Collection successfully added!")

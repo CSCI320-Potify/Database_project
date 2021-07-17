@@ -6,9 +6,9 @@ def csv_import(filename):
     csv = os.path.join(os.path.dirname(__file__), f'../{filename}')
     with open(csv, "r") as file:
         next(file)
-        song_num = 7;
-        artist_num = 1;
-        album_num = 1;
+        song_num = 7
+        artist_num = 1
+        album_num = 1
         #for line in csv.reader(file, delimiter=","):
         for line in file.readlines():
             connection = connect()
