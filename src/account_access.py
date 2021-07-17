@@ -10,8 +10,6 @@ Creates a new user. User will have a unique username and email.
 A new account will have a password, first name, last name, creation date,
 and last access date
 
-TODO I don't know if the username and email uniqueness verification works yet because
-it seems like accounts aren't saved
 """
 def signup():
     # initial sign up process needs credentials to be of certain requirements
