@@ -73,4 +73,4 @@ def login():
         return username
     print("Login Unsuccessful")
     print("Username or Password incorrect")
-    return username
+    return ''

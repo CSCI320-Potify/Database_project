@@ -2,14 +2,14 @@ from src.db import *
 import datetime
 
 
-def add_to_collection():
+def add_to_collection(user):
     connection = connect()
     cursor = connection.cursor()
     while True:
         collect = input("What is the name of the collection you wish to add to?\n")
         if collect == "quit":
             break
-        cursor.execute('SELECT COUNT(name) FROM "collection" WHERE name=%s', ([collect]))
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND user=%s', (collect, user))
         find_col = cursor.fetchone()[0]
         if find_col == 1:
             song = input("What is the name of the song you wish to add to " + collect + "?\n")
@@ -40,14 +40,15 @@ def create_collection(user):
     cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
     exists = cursor.fetchone()[0]
     if exists == 0:
-        cursor.execute('SELECT MAX(collection_num) FROM "collection"')
-        if cursor.fetchone()[0] is None: #if user has no collections, collection id is starting from 0
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', (user))
+        if cursor.fetchone()[0] == 0: # if user has no collections
             new_num = 0
-        else: # if user already has a collection
-            new_num = cursor.fetchone()[0] + 1
+        else:
+            cursor.execute('SELECT MAX(collection_num) FROM "collection"')
+            new_num = cursor.fetchone()[0] + 1    
         cursor.execute('INSERT INTO "collection" VALUES (%s, %s, %s, %s, %s)', (collect, new_num, "0", "0", user))
         connection.commit()
-        print("Collection successfully added!")
+        print("Collection successfully created!")
     else:
         print("A collection with this name already exists!")
     connection.close()

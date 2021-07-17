@@ -15,7 +15,7 @@ def main():
     if choice == "1":
         current_user = login()
     elif choice == "2":
-        current_user = signup()
+        current_user = signup().strip()
     elif choice == "3":
         quit()
     else:
