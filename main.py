@@ -29,7 +29,7 @@ def main():
             print("1: Find songs")
             print("2: Find Users")
             print("3: Collections submenu")
-            print("4: quit")
+            print("9: quit")
             choice = input()
             if choice == "1":
                 songSearch()
@@ -37,11 +37,10 @@ def main():
                 searchUser(current_user)
             elif choice == "3":
                 collections(current_user)
-            elif choice == "5":
+            elif choice == "9":
                 quit()
             else:
                 print("Unknown command")
-                quit()
 
 
 if __name__ == "__main__":

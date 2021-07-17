@@ -1,2 +1,4 @@
+# so the database credentials doesn't show
 /config
+
 src/__pycache__
