@@ -40,7 +40,7 @@ def create_collection(user):
     cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
     exists = cursor.fetchone()[0]
     if exists == 0:
-        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', (user))
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
         if cursor.fetchone()[0] == 0: # if user has no collections
             new_num = 0
         else:
@@ -138,13 +138,23 @@ def rename_collection(user):
         print("This collection was not found.")
     connection.close()
 
-
+"""
+Prints view of collection in the following format:
+ID name
+--------------------------------
+"""
 def view_collections(user):
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM "collection" WHERE username=%s ORDER BY name ASC', ([user]))
-    all_collections = cursor.fetchone()
-    print(all_collections)
+    all_collections = cursor.fetchall()
+    print("{:<3}{:<20}{:<14}{:<6}".format("ID", "name", "num_of_songs", "length" ))
+    print("-" * 45)
+    if len(all_collections) == 0:
+        print("<No collections>")
+    else:
+        for collection in all_collections:
+            print("{:^3}{:<20}{:<14}{:<6}".format(collection[1], collection[0], collection[2], collection[3]))
     connection.close()
 
 
