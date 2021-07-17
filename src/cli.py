@@ -36,7 +36,7 @@ and the user cannot have more than 99 collections.
 def create_collection(user):
     connection = connect()
     cursor = connection.cursor()
-    cursor.execute('SELECT COUNT (*) WHERE username=%s', ([user]))
+    cursor.execute('SELECT COUNT (*) FROM "collection" WHERE username=%s', ([user]))
     if cursor.fetchone()[0] > 99:
         print("You have hit the max collections of 99. Delete to add more.")
     else:
@@ -131,7 +131,10 @@ def play_collection(user):
         print("This collection was not found.")
     connection.close()
 
-
+"""
+Renamed collections cannot be greater than 19 characters
+and contain the same name as a pre-existing collection under the same user
+"""
 def rename_collection(user):
     connection = connect()
     cursor = connection.cursor()
@@ -141,7 +144,17 @@ def rename_collection(user):
     cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
     exists = cursor.fetchone()[0]
     if exists > 0:
-        rename = input("What is the new name you wish to give it?\n")
+        while True:
+            rename = input("What is the new name you wish to give it?\n")
+            cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (rename, user))
+            if len(rename.strip()) == 0:
+                print("Invalid name. Please try again.")
+            elif len(rename.strip()) > 19:
+                print("New name is too long - must be less than 19 characters. Try again.")
+            elif cursor.fetchone()[0] == 1:
+                print("Collection of", rename, "already exists. Choose another name.")
+            else:
+                break
         if rename == "quit":
             return
         cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collect, user))
@@ -177,7 +190,6 @@ def view_collections(user):
 
 def collections(user):
     while True:
-        print("Hello " + user)
         print("Select one of the following options")
         print("1: Add to collection")
         print("2: Create new collection")
