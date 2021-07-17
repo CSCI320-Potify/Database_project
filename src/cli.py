@@ -27,30 +27,43 @@ def add_to_collection(user):
     connection.close()
 
 
+"""
+A collection is created by a certain user. A created collection cannot have the same name
+as a currently existing collection under the same user. 
+The name of the collection has to be lower than 19 characters
+and the user cannot have more than 99 collections.
+"""
 def create_collection(user):
     connection = connect()
     cursor = connection.cursor()
-    while True:
-        collect = input("What is the name of the collection you wish to add?\n")
-        if len(collect.strip()) != 0:
-            break
-        print("Collection name is invalid. Please try again.")
-    if collect == "quit":
-        return
-    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-    exists = cursor.fetchone()[0]
-    if exists == 0:
-        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
-        if cursor.fetchone()[0] == 0: # if user has no collections
-            new_num = 0
-        else:
-            cursor.execute('SELECT MAX(collection_num) FROM "collection"')
-            new_num = cursor.fetchone()[0] + 1    
-        cursor.execute('INSERT INTO "collection" VALUES (%s, %s, %s, %s, %s)', (collect, new_num, "0", "0", user))
-        connection.commit()
-        print("Collection successfully created!")
+    cursor.execute('SELECT COUNT (*) WHERE username=%s', ([user]))
+    if cursor.fetchone()[0] > 99:
+        print("You have hit the max collections of 99. Delete to add more.")
     else:
-        print("A collection with this name already exists!")
+        while True:
+            collect = input("What is the name of the collection you wish to add?\n")
+            if len(collect.strip()) == 0:
+                print("Collection name is invalid. Please try again.")    
+            elif len(collect.strip()) > 19:
+                print("Collection name is too long - needs to be less than 19. Try again.")
+            else: 
+                break
+        if collect == "quit":
+            return
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+        exists = cursor.fetchone()[0]
+        if exists == 0:
+            cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
+            if cursor.fetchone()[0] == 0: # if user has no collections
+                new_num = 0
+            else:
+                cursor.execute('SELECT MAX(collection_num) FROM "collection"')
+                new_num = cursor.fetchone()[0] + 1    
+            cursor.execute('INSERT INTO "collection" VALUES (%s, %s, %s, %s, %s)', (collect, new_num, "0", "0", user))
+            connection.commit()
+            print("Collection successfully created!")
+        else:
+            print("A collection with this name already exists!")
     connection.close()
 
 
@@ -140,15 +153,19 @@ def rename_collection(user):
 
 """
 Prints view of collection in the following format:
-ID name
---------------------------------
+
+ID name                num_of_songs  length
+---------------------------------------------
+
+id cannot exceed 99 and name cannot be of length greater than 19
+
 """
 def view_collections(user):
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM "collection" WHERE username=%s ORDER BY name ASC', ([user]))
     all_collections = cursor.fetchall()
-    print("{:<3}{:<20}{:<14}{:<6}".format("ID", "name", "num_of_songs", "length" ))
+    print("{:<3}{:<20}{:<14}{:<6}".format("id", "name", "num_of_songs", "length" ))
     print("-" * 45)
     if len(all_collections) == 0:
         print("<No collections>")
