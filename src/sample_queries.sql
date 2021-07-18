@@ -15,6 +15,7 @@ INSERT INTO friends("user", follows) values
     ('greg3', 'rob4'),
     ('rob4', 'bobby1');
 
+-- Why is there some attributes in quotes and some are not?
 INSERT INTO song("Title", length, "song_num", "release_date") values
     ('song 1', 1000, 1, 2021),
     ('song 2', 1000, 2, 2021),

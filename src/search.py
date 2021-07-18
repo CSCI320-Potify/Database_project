@@ -34,6 +34,62 @@ def searchUser(current_user):
     print("Returning to options select")
 
 
-
 def searchSong():
-    return
+    while True:
+        print('''Search song by:
+        0: Title
+        1: Artist
+        2: Album
+        3: Genre
+        9: Go back
+        ''')
+        choice = input()
+        # TODO plans for function reusability
+        if choice == '0':
+            searchSongTitle()
+        elif choice == '1':
+            searchSongArtist()
+        elif choice == '2':
+            searchSongAlbum()
+        elif choice == '3':
+            searchSongGenre()
+        elif choice == '9':
+            return
+        else:
+            print("Invalid command. Try again.")
+
+"""
+Song search by title will take 3 or more characters as input and finds all songs
+that includes the input. 
+"""
+def searchSongTitle():
+    while True:
+        print("Enter song title (3 or more characters) | 'q!' to go back: ")
+        title = input()
+        if len(title.strip()) < 3:
+            print("Please enter 3 or more characters.")
+        elif title == "q!":
+            return
+        else:
+            title = '%' + title + '%'
+            break
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM "song" WHERE "Title" LIKE %s', ([title]))
+    songs = cursor.fetchall()
+    pages = int(len(songs) / 10)
+    for page in range(pages + 1):
+        print("Page", str(page))
+        for song in songs: # TODO formatting based on DB
+            print(song)
+        if page != pages: # last page
+            while True:
+                print("Next page? (y|n)")
+                choice = input()
+                if choice == 'n':
+                    return
+                elif choice == 'y':
+                    break
+                else:
+                    print("Invalid option. Try again.")
+    connection.close()

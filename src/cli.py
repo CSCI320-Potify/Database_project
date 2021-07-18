@@ -9,13 +9,13 @@ def add_to_collection(user):
         collect = input("What is the name of the collection you wish to add to?\n")
         if collect == "quit":
             break
-        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND user=%s', (collect, user))
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
         find_col = cursor.fetchone()[0]
-        if find_col == 1:
+        if find_col > 0:
             song = input("What is the name of the song you wish to add to " + collect + "?\n")
             if song == "quit":
                 break
-            cursor.execute('SELECT COUNT(Title) FROM "Song" WHERE Title=%s', ([song]))
+            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title`"=%s', ([song]))
             find_song = cursor.fetchone()[0]
             if find_song == 1:
                 cursor.execute('INSERT INTO "collection-song"(Collection_num, song_num) VALUES (1, 2)')

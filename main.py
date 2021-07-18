@@ -1,6 +1,6 @@
 from src.cli import *
 from src.account_access import *
-from src.search import *
+from src.search import searchSong, searchUser
 
 def main():
     #csv_import("top1000_songs.csv")
@@ -26,14 +26,14 @@ def main():
     if current_user != '':
         print("Welcome Back " + current_user)
         while True:
-            print("Select one of the following options")
+            print("Select one of the 1 following options")
             print("1: Find songs")
             print("2: Find Users")
             print("3: Collections submenu")
             print("9: quit")
             choice = input()
             if choice == "1":
-                songSearch()
+                searchSong()
             elif choice == "2":
                 searchUser(current_user)
             elif choice == "3":
