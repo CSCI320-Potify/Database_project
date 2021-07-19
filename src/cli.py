@@ -12,13 +12,23 @@ def add_to_collection(user):
         cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
         find_col = cursor.fetchone()[0]
         if find_col > 0:
+            cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+            col_num = cursor.fetchone()[0]
             song = input("What is the name of the song you wish to add to " + collect + "?\n")
             if song == "quit":
                 break
-            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title`"=%s', ([song]))
+            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title"=%s', ([song]))
             find_song = cursor.fetchone()[0]
             if find_song == 1:
-                cursor.execute('INSERT INTO "collection-song"(Collection_num, song_num) VALUES (1, 2)')
+                cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
+                song_nu = cursor.fetchone()[0]
+                cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
+                length = cursor.fetchone()[0]
+                cursor.execute('INSERT INTO "collection-song"("Collection_num", "song_num") VALUES (%s, %s)', (col_num, song_nu))
+                connection.commit()
+                cursor.execute('UPDATE "collection" SET duration = duration + %s WHERE "collection_num" = %s', (length, col_num))
+                connection.commit()
+                cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs + 1 WHERE "collection_num" = %s', ([col_num]))
                 connection.commit()
             else:
                 print("The specified song was not found.")

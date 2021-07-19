@@ -1,5 +1,6 @@
 from src.db import *
 
+
 def searchUser(current_user):
     email = input("Enter email of user to search for:")
     connection = connect()
@@ -41,7 +42,7 @@ def searchSong():
         1: Artist
         2: Album
         3: Genre
-        9: Go back
+        4: Go back
         ''')
         choice = input()
         # TODO plans for function reusability
@@ -53,8 +54,8 @@ def searchSong():
             searchSongAlbum()
         elif choice == '3':
             searchSongGenre()
-        elif choice == '9':
-            return
+        elif choice == '4':
+            break
         else:
             print("Invalid command. Try again.")
 
