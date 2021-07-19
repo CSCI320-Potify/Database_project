@@ -1,10 +1,16 @@
 from src.db import *
 import datetime
 
-
+"""
+Adds a song based on its name to the user's collection
+"""
 def add_to_collection(user):
     connection = connect()
     cursor = connection.cursor()
+    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
+    if cursor.fetchone()[0] == 0:
+        print("There are no collections. Create a collection first.")
+        return
     while True:
         collect = input("What is the name of the collection you wish to add to?\n")
         if collect == "quit":
@@ -15,7 +21,7 @@ def add_to_collection(user):
             song = input("What is the name of the song you wish to add to " + collect + "?\n")
             if song == "quit":
                 break
-            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title`"=%s', ([song]))
+            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title"=%s', ([song]))
             find_song = cursor.fetchone()[0]
             if find_song == 1:
                 cursor.execute('INSERT INTO "collection-song"(Collection_num, song_num) VALUES (1, 2)')
