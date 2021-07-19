@@ -1,6 +1,5 @@
 from src.db import *
 
-
 def searchUser(current_user):
     email = input("Enter email of user to search for:")
     connection = connect()
@@ -42,46 +41,54 @@ def searchSong():
         1: Artist
         2: Album
         3: Genre
-        4: Go back
+        9: Go back
         ''')
         choice = input()
-        # TODO plans for function reusability
         if choice == '0':
-            searchSongTitle()
+            searchForSong("title")
         elif choice == '1':
-            searchSongArtist()
+            searchForSong("artist")
         elif choice == '2':
-            searchSongAlbum()
+            searchForSong("album")
         elif choice == '3':
-            searchSongGenre()
-        elif choice == '4':
-            break
+            searchForSong("genre") # TODO 
+        elif choice == '9':
+            return
         else:
             print("Invalid command. Try again.")
 
 """
-Song search by title will take 3 or more characters as input and finds all songs
-that includes the input. 
+Private. Ensures that a search term is 3 or more characters long before
+a song can be searched for. 
+The term has no trailing white space and is a substring
 """
-def searchSongTitle():
+def searchConditions(term):
     while True:
-        print("Enter song title (3 or more characters) | 'q!' to go back: ")
-        title = input()
-        if len(title.strip()) < 3:
+        print(f"Enter song {term} (3 or more characters) | 'q!' to go back: ")
+        search = input()
+        if len(search.strip()) < 3:
             print("Please enter 3 or more characters.")
-        elif title == "q!":
-            return
+        elif search == "q!":
+            return "NULL"
         else:
-            title = '%' + title + '%'
+            search = '%' + search + '%'
             break
-    connection = connect()
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM "song" WHERE "Title" LIKE %s', ([title]))
-    songs = cursor.fetchall()
+    return search
+
+"""
+Private. Songs will only be displayed in pages of 10 or less songs.
+User can only go forward in pages, but not backwards.
+"""
+def displayPages(songs):
+    if len(songs) == 0:
+        print("No results")
+        return
     pages = int(len(songs) / 10)
     for page in range(pages + 1):
         print("Page", str(page))
-        for song in songs: # TODO formatting based on DB
+        for song in songs: # TODO formatting based on DB and other tables
+            """   
+            """
             print(song)
         if page != pages: # last page
             while True:
@@ -93,4 +100,44 @@ def searchSongTitle():
                     break
                 else:
                     print("Invalid option. Try again.")
+
+"""
+Song search by title will take 3 or more characters as input and finds all songs
+that includes the input. 
+"""
+def searchForSong(term):
+    search = searchConditions(term)
+    if search == "NULL":
+        return
+
+    connection = connect()
+    cursor = connection.cursor()
+
+    if term == "title":
+        cursor.execute('SELECT * FROM "song" WHERE "Title" LIKE %s', ([search]))
+        songs = cursor.fetchall()
+        
+    elif term == "artist":
+        cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" LIKE %s', ([search]))
+        artist_num = cursor.fetchall()
+        songs = []
+        for num in artist_num:
+            cursor.execute('SELECT "song_num" FROM "artist_song" WHERE "artist_num"=%s', ([num]))
+            song_num = cursor.fetchone()[0]
+            cursor.execute('SELECT * FROM "song" WHERE "song_num"=%s', ([song_num]))
+            songs.append(cursor.fetchone()[0])
+    elif term == "album":
+        cursor.execute('SELECT "album_num" FROM "album" WHERE "name" LIKE %s', ([search]))
+        album_num = cursor.fetchall()
+        songs = []
+        for num in album_num:
+            cursor.execute('SELECT "song_num" FROM "song-album" WHERE "album_num"=%s', ([num]))
+            song_num = cursor.fetchone()[0]
+            cursor.execute('SELECT * FROM "song" WHERE "song_num"=%s', ([song_num]))
+            songs.append(cursor.fetchone()[0])
+    elif term == "genre":
+        pass
+
+    displayPages(songs)
+
     connection.close()

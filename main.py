@@ -1,6 +1,7 @@
 from src.cli import *
 from src.account_access import *
 from src.search import searchSong, searchUser
+from src.Music_import import csv_import
 
 def main():
     #csv_import("top1000_songs.csv")
