@@ -28,7 +28,7 @@ def add_to_collection(user):
             if find_song == 1:
                 cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
                 song_nu = cursor.fetchone()[0]
-                cursor.execute('SELECT COUNT("song_nu") FROM "collection-song" WHERE Collection_num=%s AND song_num=%s', (col_num, song_nu))
+                cursor.execute('SELECT COUNT("song_num") FROM "collection-song" WHERE "Collection_num"=%s AND "song_num"=%s', (col_num, song_nu))
                 song_exists = cursor.fetchone()[0]
                 if song_exists == 0:
                     cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
