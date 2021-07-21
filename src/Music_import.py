@@ -77,9 +77,6 @@ def csv_import(filename):
                 cursor.execute('INSERT INTO "genre-genre_list"("genre_id", "genre_list_id") VALUES (%s, %s)',
                                (genre, list_id))
 
-            connection.commit()
-            connection.close()
-            break
             #Adds song and song-genre
             cursor.execute('INSERT INTO Song("Title", release_date, "length", "song_num") VALUES (%s, %s, %s, %s)', (song, year, duration, song_num))
             cursor.execute('INSERT INTO "song-genre"("song_num", "genre_list") VALUES (%s, %s)',
