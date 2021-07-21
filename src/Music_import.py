@@ -21,7 +21,11 @@ def csv_import(filename):
             if(len(line.split("\"")) != 3):
                 print(line + ": was skipped")
                 continue
-            temp_line = split(line)
+            try:
+                temp_line = split(line)
+            except:
+                print(line + ": was skipped")
+                continue
             temp_line_check = ""
             for i in temp_line[:-2]:
                 temp_line_check+=","+i
@@ -38,17 +42,25 @@ def csv_import(filename):
 
 
             #adds genres
-            for genre in genres:
-                cursor.execute('SELECT "id" FROM genre WHERE name=%s', ([genre]))
+            genre = genre[1:-1]
+            genre.replace("'","")
+            genrel = genre.split(",")
+            for genre in genrel:
+                score = ""
+                for letter in genre:
+                    if(genre!=" " and letter!="," and letter!="'"):
+                        score+=letter
+                cursor.execute('SELECT "id" FROM genre WHERE name=%s', [score])
                 ge_id = cursor.fetchone()
 
-                if result == None:
-                    cursor.execute('INSERT into genre(name, id) VALUES (%s, %s)', (genre, artist_num))
+                if ge_id == None:
                     ge_id = gen_id
-                    gen_id+=1
+                    gen_id += 1
+                    cursor.execute('INSERT into genre(name, id) VALUES (%s, %s)', (score, ge_id))
+
                 else:
-                    cursor.execute('SELECT "artist_num" FROM artist WHERE name=%s', ([artist]))
-                    ge_id = cursor.fetchone()[0]
+                    #cursor.execute('SELECT "artist_num" FROM artist WHERE name=%s', ([artist]))
+                    pass
                 #adds for genre list
                 list_of_genre.append(ge_id)
 
@@ -58,14 +70,16 @@ def csv_import(filename):
 
             list_id = len(list_result) + 1;
 
-            print(list_id)
+
             cursor.execute('INSERT INTO genre_list(genre_list_id) VALUES (%s)', [list_id])
 
             for genre in list_of_genre:
                 cursor.execute('INSERT INTO "genre-genre_list"("genre_id", "genre_list_id") VALUES (%s, %s)',
                                (genre, list_id))
 
-
+            connection.commit()
+            connection.close()
+            break
             #Adds song and song-genre
             cursor.execute('INSERT INTO Song("Title", release_date, "length", "song_num") VALUES (%s, %s, %s, %s)', (song, year, duration, song_num))
             cursor.execute('INSERT INTO "song-genre"("song_num", "genre_list") VALUES (%s, %s)',
@@ -119,8 +133,6 @@ def csv_import(filename):
             album_num+=1
             artist_num+=1
 
-            if song_num > 10:
-                break
         connection.commit()
         connection.close()
         file.close()
@@ -177,7 +189,6 @@ def split(line):
         print("Line is " + line + "\n")
     genre = args[-2]
     args[-3] = args[-3][:-1]
-    print("%%%%%%%%%%%% " + args[-3] + "\n")
     rest = args[-3].split(",")
     duration = rest[-1]
     artist = rest[-3]
