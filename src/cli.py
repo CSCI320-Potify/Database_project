@@ -25,7 +25,7 @@ def add_to_collection(user):
                 break
             cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title"=%s', ([song]))
             find_song = cursor.fetchone()[0]
-            if find_song == 1:
+            if find_song > 0:
                 cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
                 song_nu = cursor.fetchone()[0]
                 cursor.execute('SELECT COUNT("song_num") FROM "collection-song" WHERE "Collection_num"=%s AND "song_num"=%s', (col_num, song_nu))
@@ -91,30 +91,41 @@ def create_collection(user):
 def delete_from_collection(user):
     connection = connect()
     cursor = connection.cursor()
-    collect = input("What is the name of the collection you wish to delete from?\n")
-    if collect == "quit":
+    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
+    if cursor.fetchone()[0] == 0:
+        print("There are no collections. Create a collection first.")
         return
-    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-    exists = cursor.fetchone()[0]
-    if exists > 0:
-        song = input("What is the name of the song you wish to delete?")
-        if song == "quit":
-            return
-        cursor.execute('SELECT song_num FROM "Song" WHERE Title=%s', ([song]))
-        song_nu = cursor.fetchone()[0]
-        cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-        collect_nu = cursor.fetchone()[0]
-        cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE Collection_num=%s AND song_num=%s', (collect_nu, song_nu))
-        song_exists = cursor.fetchone()[0]
-        if song_exists > 0:
-            cursor.execute('DELETE FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-            connection.commit()
-            print("Song successfully deleted!")
+    while True:
+        collect = input("What is the name of the collection you wish to delete from?\n")
+        if collect == "quit":
+            break
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+        find_col = cursor.fetchone()[0]
+        if find_col > 0:
+            song = input("What is the name of the song you wish to delete?\n")
+            if song == "quit":
+                return
+            cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
+            song_nu = cursor.fetchone()[0]
+            cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+            collect_nu = cursor.fetchone()[0]
+            cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+            song_exists = cursor.fetchone()[0]
+            if song_exists > 0:
+                cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
+                length = cursor.fetchone()[0]
+                cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+                connection.commit()
+                cursor.execute('UPDATE "collection" SET duration = duration - %s WHERE "collection_num" = %s', (length, collect_nu))
+                connection.commit()
+                cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs - 1 WHERE "collection_num" = %s', ([collect_nu]))
+                connection.commit()
+                print("Song successfully deleted!")
+            else:
+                print("This song was not found.")
         else:
-            print("This song was not found.")
-    else:
-        print("This collection was not found.")
-    connection.close()
+            print("This collection was not found.")
+        connection.close()
 
 
 def delete_collection(user):
