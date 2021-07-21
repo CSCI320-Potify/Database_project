@@ -156,7 +156,16 @@ def play_collection(user):
     if exists > 0:
         cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
         coll_num = cursor.fetchone()[0]
-        cursor.execute('UPDATE "collection-song" SET played=%s WHERE collection_num=%s', (True, coll_num))
+        cursor.execute('SELECT song_num FROM "collection-song" WHERE "Collection_num"=%s', ([coll_num]))
+        songs = cursor.fetchall()
+        for s in songs:
+            cursor.execute('SELECT COUNT(*) FROM "user-song" WHERE username=%s AND song_num=%s', (user, s))
+            user_played = cursor.fetchone()[0]
+            if user_played:
+                cursor.execute('UPDATE "user-song" SET play_count=play_count+1 WHERE username=%s AND song_num=%s', (user, s))
+                connection.commit()
+            else:
+                cursor.execute('INSERT INTO "user-song" VALUES (%s, %s, %s)', (user, s, 1))
         connection.commit()
         print("Playing collection...")
     else:
