@@ -1,16 +1,18 @@
 from src.db import *
 from collections import OrderedDict
+import datetime
 import csv
 
 
 def csv_import(filename):
     csv = os.path.join(os.path.dirname(__file__), f'../{filename}')
     with open(csv, "r") as file:
+        f = open("BAD NAMES", "w")
         next(file)
-        song_num = 7
+        song_num = 1
         artist_num = 1
         album_num = 1
-        gen_id = 1;
+        gen_id = 1
 
         connection = connect()
         cursor = connection.cursor()
@@ -20,11 +22,13 @@ def csv_import(filename):
             list_of_genre =[]
             if(len(line.split("\"")) != 3):
                 print(line + ": was skipped")
+                f.write(line + "\n")
                 continue
             try:
                 temp_line = split(line)
             except:
                 print(line + ": was skipped")
+                f.write(line + "\n")
                 continue
             temp_line_check = ""
             for i in temp_line[:-2]:
@@ -100,7 +104,7 @@ def csv_import(filename):
             result_album_num = cursor.fetchone()
 
             if result_album_num == None:
-                cursor.execute('INSERT into album(name, "album_num", duration) VALUES (%s, %s, %s)', (album, album_num, duration))
+                cursor.execute('INSERT into album(name, "album_num", duration, num_of_songs) VALUES (%s, %s, %s, %s)', (album, album_num, str(0), str(0)))
                 result_album_num = album_num
             else:
                 result = len(cursor.fetchall()) + 1
@@ -113,18 +117,74 @@ def csv_import(filename):
 
             #song album
             x = track_num+1
+
             cursor.execute('INSERT INTO "song-album"("album_num", "song_num", "track_num") VALUES (%s, %s, %s)', (result_album_num, song_num, x))
 
             cursor.execute('SELECT duration FROM album WHERE album_num=%s', ([result_album_num]))
             album_duration = cursor.fetchone()[0]
-            cursor.execute('UPDATE album SET duration = %s WHERE album_num = %s', (album_duration + int (duration), result_album_num))
+            cursor.execute('SELECT num_of_songs FROM album WHERE album_num=%s', ([result_album_num]))
+            num_of_songs = cursor.fetchone()[0]
+            cursor.execute('SELECT release_date FROM album WHERE album_num=%s', ([result_album_num]))
+            release_date = cursor.fetchone()[0]
+            cursor.execute('UPDATE album SET duration = %s WHERE album_num = %s', (album_duration + int(duration), result_album_num))
+            cursor.execute('UPDATE album SET num_of_songs = %s WHERE album_num = %s',
+                           (num_of_songs+1, result_album_num))
+            new_year = max(int(release_date), int(year))
+            cursor.execute('UPDATE album SET release_date = %s WHERE album_num = %s',
+                           (new_year, result_album_num))
 
             #artist-album
-            cursor.execute('SELECT COUNT(*) FROM "album-artist" WHERE artist_num=%s AND album_num=%s', (result, result_album_num))
-            isThere = len(cursor.fetchall())
+            cursor.execute('SELECT album_num FROM "album-artist" WHERE artist_num=%s AND album_num=%s', (result, result_album_num))
+            isThere = cursor.fetchone()
+            print("result is (artist num)" + str(result) + "\n")
+            print("artist_num is (artist num)" + str(artist_num) + "\n")
 
-            if isThere == 0:
+            if isThere == None:
                 cursor.execute('INSERT into "album-artist"(artist_num, album_num) VALUES (%s, %s)', (result, result_album_num))
+
+
+            #album genre_list
+            cursor.execute('SELECT genre_list FROM "album-genre" WHERE album_num=%s', ([result_album_num]))
+            a_glist = cursor.fetchone()
+
+            if a_glist == None:
+                list_id+=1;
+                a_glist = list_id;
+                cursor.execute('INSERT into "genre_list"(genre_list_id) VALUES (%s)', ([a_glist]))
+                cursor.execute('INSERT into "album-genre"(album_num, genre_list) VALUES (%s,%s)', (result_album_num,a_glist))
+            else:
+                a_glist = a_glist[0]
+
+            for genre in list_of_genre:
+                cursor.execute('SELECT genre_list_id FROM "genre-genre_list" WHERE genre_list_id=%s AND genre_id=%s',(a_glist, genre))
+                a_glist_there = cursor.fetchone()
+
+                if a_glist_there == None:
+                    cursor.execute('INSERT INTO "genre-genre_list"("genre_id", "genre_list_id") VALUES (%s, %s)',
+                               (genre, a_glist))
+
+            #artist genre
+            cursor.execute('SELECT genre_list FROM "artist-genre" WHERE artist_num=%s', ([result]))
+            ar_glist = cursor.fetchone()
+
+            if ar_glist == None:
+                list_id+=1;
+                ar_glist = list_id;
+                cursor.execute('INSERT into "genre_list"(genre_list_id) VALUES (%s)', ([ar_glist]))
+                cursor.execute('INSERT into "artist-genre"(artist_num, genre_list) VALUES (%s,%s)', (result, ar_glist))
+            else:
+                ar_glist = ar_glist[0]
+
+            for genre in list_of_genre:
+                cursor.execute('SELECT genre_list_id FROM "genre-genre_list" WHERE genre_list_id=%s AND genre_id=%s',
+                               (ar_glist, genre))
+                ar_glist_there = cursor.fetchone()
+
+                if ar_glist_there == None:
+                    cursor.execute('INSERT INTO "genre-genre_list"("genre_id", "genre_list_id") VALUES (%s, %s)',
+                                   (genre, ar_glist))
+
+
 
             song_num+=1
             album_num+=1
@@ -133,10 +193,7 @@ def csv_import(filename):
         connection.commit()
         connection.close()
         file.close()
-
-        f = open("Genres" , "w")
-        for gen in list(dict.fromkeys(genres)):
-            f.write(gen +" ")
+        f.close()
 
 genres = []
 
