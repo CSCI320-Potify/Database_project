@@ -42,7 +42,13 @@ def csv_import(filename):
                 print("temp " + temp_line_check + "\n")
                 print("song: %s, artist: %s, album: %s, duration: %s, genre: %s, year: %s" % (song, artist, album, duration, genre, year))
 
+            #Checks if song is currently logged
+            cursor.execute('SELECT song_num FROM song WHERE "Title"=%s AND "length"=%s AND release_date=%s', (song, duration, year))
+            duplicateSong = cursor.fetchone()
 
+            if duplicateSong != None:
+                print(line + "was duplicated")
+                continue;
 
 
             #adds genres
@@ -136,12 +142,10 @@ def csv_import(filename):
             #artist-album
             cursor.execute('SELECT album_num FROM "album-artist" WHERE artist_num=%s AND album_num=%s', (result, result_album_num))
             isThere = cursor.fetchone()
-            print("result is (album num)" + str(result_album_num) + "\n")
-            print("artist_num is (artist num)" + str(album_num) + "\n")
+
 
             if isThere == None:
                 cursor.execute('INSERT into "album-artist"(artist_num, album_num) VALUES (%s, %s)', (result, result_album_num))
-
 
             #album genre_list
             cursor.execute('SELECT genre_list FROM "album-genre" WHERE album_num=%s', ([result_album_num]))
