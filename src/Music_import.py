@@ -54,7 +54,7 @@ def csv_import(filename):
                 for letter in genre:
                     if(genre!=" " and letter!="," and letter!="'"):
                         score+=letter
-                cursor.execute('SELECT "id" FROM genre WHERE name=%s', [score])
+                cursor.execute('SELECT id FROM genre WHERE name=%s', [score])
                 ge_id = cursor.fetchone()
 
                 if ge_id == None:
@@ -69,10 +69,10 @@ def csv_import(filename):
                 list_of_genre.append(ge_id)
 
             #creates genre list
-            cursor.execute('SELECT "genre_list_id" FROM genre_list')
+            cursor.execute('SELECT genre_list_id FROM genre_list')
             list_result = cursor.fetchall()
 
-            list_id = len(list_result) + 1;
+            list_id = len(list_result) + 1
 
 
             cursor.execute('INSERT INTO genre_list(genre_list_id) VALUES (%s)', [list_id])
@@ -87,30 +87,30 @@ def csv_import(filename):
                            (song_num, list_id))
 
             #artist
-            cursor.execute('SELECT "artist_num" FROM artist WHERE name=%s', ([artist]))
+            cursor.execute('SELECT artist_num FROM artist WHERE name=%s', ([artist]))
             result = cursor.fetchone()
 
             if result == None:
                 cursor.execute('INSERT into artist(name, "artist_num") VALUES (%s, %s)', (artist, artist_num))
                 result = artist_num
             else:
-                cursor.execute('SELECT "artist_num" FROM artist WHERE name=%s', ([artist]))
+                cursor.execute('SELECT artist_num FROM artist WHERE name=%s', ([artist]))
                 result = cursor.fetchone()[0]
             #artist-song
             cursor.execute('INSERT INTO "artist-song"("artist_num", "song_num") VALUES (%s, %s)', (result, song_num))
 
             #album
-            cursor.execute('SELECT "album_num" FROM album WHERE name=%s', ([album]))
+            cursor.execute('SELECT album_num FROM album WHERE name=%s', ([album]))
             result_album_num = cursor.fetchone()
 
             if result_album_num == None:
                 cursor.execute('INSERT into album(name, "album_num", duration, num_of_songs) VALUES (%s, %s, %s, %s)', (album, album_num, str(0), str(0)))
                 result_album_num = album_num
-            else:
-                result = len(cursor.fetchall()) + 1
+            #else:
+            #    result = len(cursor.fetchall()) + 1
 
 
-            cursor.execute('SELECT MAX("track_num") FROM "song-album"')
+            cursor.execute('SELECT MAX(track_num) FROM "song-album"')
             track_num = cursor.fetchone()[0] #what if their is no track num
             if track_num == None:
                 track_num = 0
@@ -136,8 +136,8 @@ def csv_import(filename):
             #artist-album
             cursor.execute('SELECT album_num FROM "album-artist" WHERE artist_num=%s AND album_num=%s', (result, result_album_num))
             isThere = cursor.fetchone()
-            print("result is (artist num)" + str(result) + "\n")
-            print("artist_num is (artist num)" + str(artist_num) + "\n")
+            print("result is (album num)" + str(result_album_num) + "\n")
+            print("artist_num is (artist num)" + str(album_num) + "\n")
 
             if isThere == None:
                 cursor.execute('INSERT into "album-artist"(artist_num, album_num) VALUES (%s, %s)', (result, result_album_num))
