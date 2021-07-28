@@ -18,10 +18,10 @@ Let's Think About Living,Bob Luman,Livin' Lovin' Sounds,124800,"['pop', 'pop roc
 How High the Moon - Remastered,Les Paul & Mary Ford,How High the Moon (Remastered),125289,"['brostep', 'edm', 'pop', 'pop dance', 'progressive electro house']",1920
 (What A) Wonderful World - Remastered,Sam Cooke,The Wonderful World Of Sam Cooke (Remastered),125507,"['dance pop', 'pop', 'post-teen pop']",1920
 Hearts of Stone,The Fontaine Sisters,Happy Days and Lonely Nights,125852,"['permanent wave', 'pop']",1920
-Walk Don't Run,The Ventures,The Very Best Of The Ventures,126480,['electro house'],1920
+Walk Don't Run,The Ventures,The Very Best Of The Ventures,126480,"['electro house']",1920
 Footsteps,Steve Lawrence,Footsteps,127018,"['latin', 'puerto rican pop', 'reggaeton', 'trap latino']",1920
 Heartbreak Hotel,Elvis Presley,Elvis' Golden Records,127560,"['latin', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1920
-Go Jimmy Go,Jimmy Clanton,"Go, Jimmy, Go",128888,"['dance pop', 'pop', 'post-teen pop', 'r&b']",1920
+Go Jimmy Go,Jimmy Clanton,Go, Jimmy, Go,128888,"['dance pop', 'pop', 'post-teen pop', 'r&b']",1920
 The Big Hurt,Toni Fisher,The Big Hurt!,129106,"['british soul', 'pop', 'pop soul', 'uk pop']",1920
 Good Timin,Jimmy Jones,Classic and Collectable - Jimmy Jones - Good Timin',129306,"['emo rap', 'miami hip hop']",1920
 (We're Gonna) Rock Around The Clock,Bill Haley & His Comets,Rock Around The Clock,129893,"['dance pop', 'pop', 'post-teen pop']",1920
@@ -29,7 +29,6 @@ Lonely Weekends,Charlie Rich,The Very Best of Charlie Rich - Lonely Weekends,130
 Cool Water,Sons of the Pioneers,Cool Water And Seventeen Timeless Western Favorites,131840,"['latin', 'reggaeton', 'reggaeton colombiano']",1920
 It's Only Make Believe,Conway Twitty,Conway Twitty Sings,132027,"['dance pop', 'pop', 'uk pop']",1920
 The Third Man Theme (The Harry Lime Theme) - Original Version,Anton Karas,"Anton Karas plays ""The Third Man Theme""",133520,"['latin', 'latin hip hop', 'reggaeton', 'trap latino', 'tropical']",1920
-The Third Man Theme (The Harry Lime Theme) - Original Version,Anton Karas,"Anton Karas plays ""The Third Man Theme""",133520,"['big room', 'dance pop', 'edm', 'pop', 'pop dance']",1920
 Love Letters In The Sand - Single Version,Pat Boone,Pat Boone's Greatest Hits (Reissue),134560,"['dance pop', 'edm', 'electro house', 'house', 'pop', 'pop dance', 'progressive house', 'uk dance']",1920
 Beatnik Fly,Johnny & The Hurricanes,Greatest Hits,134773,"['colombian pop', 'dance pop', 'latin', 'latin pop', 'pop']",1920
 Party Doll,Buddy Knox,Buddy Knox,135173,"['dance pop', 'electropop', 'pop', 'post-teen pop']",1920
@@ -38,7 +37,7 @@ Tequila,The Champs,Greatest Hits / Tequila,135240,"['k-pop', 'k-pop girl group']
 Honeycomb,Various Artists,Rock'n Roll Is Back,135520,"['boy band', 'pop', 'post-teen pop', 'talent show']",1920
 Swingin' School,Bobby Rydell,Greatest Hits,135560,"['glam metal', 'hard rock', 'rock']",1920
 Lady Luck,Lloyd Price,Mr Personality,135853,"['modern rock', 'rock']",1920
-Hound Dog,Elvis Presley,Elvis' Golden Records,136027,['sertanejo'],1920
+Hound Dog,Elvis Presley,Elvis' Golden Records,136027,"['sertanejo']",1920
 Baby My Heart,The Crickets,That'll Be the Day,136046,"['dance pop', 'pop', 'post-teen pop']",1920
 Forever,Various Artists,Music Enchanted Me,136373,"['dance pop', 'edm', 'pop', 'pop dance']",1920
 Lonely Blue Boy,Conway Twitty,Here's Conway,136438,"['australian dance', 'australian pop', 'dance pop', 'pop']",1920
@@ -108,7 +107,7 @@ Too Much,Elvis Presley,Elvis' Golden Records,152787,"['electro house', 'pop naci
 Statesboro Blues,Blind Willie McTell,Blind Willie McTell -Statesboro Blues - The Early Years 1927-1935,152853,"['latin', 'latin hip hop', 'reggaeton', 'trap latino', 'tropical']",1930
 Kiddio,Brook Benton,Brook Benton - The Best of Brook Benton,153104,"['dance pop', 'pop', 'pop rap', 'post-teen pop', 'urban contemporary']",1930
 Round And Round - Remastered - 1992,Perry Como,Today & Yesterday,153307,"['atl hip hop', 'rap', 'trap']",1930
-Way Down Yonder In New Orleans,Freddy Cannon,The A-Z Collection: Freddy Cannon,153360,['forro'],1930
+Way Down Yonder In New Orleans,Freddy Cannon,The A-Z Collection: Freddy Cannon,153360,"['forro']",1930
 King Porter Stomp,Jelly Roll Morton,Jelly Roll Morton 1923/24,153427,"['reggae', 'roots reggae']",1930
 My Home Town,Paul Anka,His Big 15 Plus 2,153445,"['latin', 'latin pop', 'puerto rican pop', 'tropical']",1930
 For Me And My Gal - Single Version,Judy Garland,Over The Rainbow – The Very Best of Judy Garland,153533,"['dance pop', 'edm', 'electropop', 'indietronica', 'metropopolis', 'pop', 'post-teen pop', 'tropical house', 'uk pop']",1930
@@ -165,7 +164,7 @@ Me And My Girl,Various Artists,Top Hits Of The 1930s,160733,"['alternative metal
 Don't Let The Stars Get In Your Eyes,Perry Como,Pure Gold,160773,"['glam rock', 'mellow gold', 'piano rock', 'soft rock']",1930
 Nature Boy,Various Artists,100 Love Songs & Love Ballads - Classic Lovesongs from the Greatest Legends (Valentines Edition),161080,"['florida rap', 'hip hop', 'melodic rap', 'miami hip hop', 'rap', 'southern hip hop', 'trap']",1930
 April Love,Pat Boone,Pat Boone's Greatest Hits (Reissue),161200,"['colombian pop', 'latin', 'latin pop', 'reggaeton', 'reggaeton colombiano', 'trap latino']",1930
-I Can't Be Satisfied,Various Artists,"The Best of Chess Records Original Artist Recordings Of Songs In The Film ""Cadillac Records""",161347,['alternative hip hop'],1930
+I Can't Be Satisfied,Various Artists,"The Best of Chess Records Original Artist Recordings Of Songs In The Film ""Cadillac Records""",161347,"['alternative hip hop']",1930
 "Love Me Tender - From the 20th Century-Fox CinemaScope Production ""Love Me Tender""",Elvis Presley,Elvis' Golden Records,161360,"['g funk', 'gangster rap', 'hip hop', 'pop rap', 'rap', 'west coast rap']",1930
 Lost Highway,Hank Williams,Masterpieces: Hank Williams,161653,"['atl hip hop', 'atl trap', 'rap', 'trap']",1930
 Alley Oop,The Hollywood Argyles,Alley Oop - The Very Best Of,161733,"['bolero', 'latin', 'latin pop']",1930
@@ -183,7 +182,7 @@ Deep In the Heart of Texas,Gene Autry,The Essential Gene Autry,163560,"['dance p
 In a Mist,Bix Beiderbecke,"Bix Beiderbecke, Volume I: Singin' The Blues",163733,"['north carolina hip hop', 'rap']",1930
 Groovin' High,Dizzy Gillespie,Groovin' High,163907,"['brazilian hip hop', 'rap df', 'trap brasileiro']",1930
 Puppy Love - Remix,Paul Anka,Put Your Head On My Shoulder: The Very Best Of Paul Anka,164000,"['pop punk', 'punk', 'socal pop punk']",1930
-Caldonia,Louis Jordan & His Tympany Five,Jukebox Hits Volume 1 1942-1947,164053,['emo rap'],1930
+Caldonia,Louis Jordan & His Tympany Five,Jukebox Hits Volume 1 1942-1947,164053,"['emo rap']",1930
 Chicken Shack Boogie - Rerecorded,Amos Milburn,The Very Best of Amos Milburn,164119,"['dance pop', 'electropop', 'pop', 'pop rap', 'post-teen pop', 'viral pop']",1930
 Candy Man Blues,Mississippi John Hurt,Avalon Blues - The Complete 1928 OKeh Recordings,164362,"['desi pop', 'modern bollywood']",1930
 You Couldn't Be Cuter,Various Artists,Top Hits Of The 1930s,164440,"['modern rock', 'permanent wave', 'rock']",1930
@@ -231,7 +230,7 @@ I'm In The Mood For Love,Various Artists,Top Hits Of The 1930s,169533,"['latin',
 Boom Clap,Charli XCX,SUCKER,169866,"['alternative metal', 'german metal', 'industrial', 'industrial metal', 'industrial rock', 'neue deutsche harte', 'nu metal']",1940
 Nevertheless,Various Artists,Top Hits Of The 1930s,169867,"['hip hop', 'pittsburgh rap', 'rap']",1940
 Bei Mir Bist Du Schoen,Various Artists,Top Hits Of The 1930s,169960,"['album rock', 'classic rock', 'glam rock', 'hard rock', 'metal', 'rock']",1940
-Chimes Blues - Original,King Oliver's Creole Jazz Band,King Oliver and His Creole Jazz Band Selected Favorites,170000,['opm'],1940
+Chimes Blues - Original,King Oliver's Creole Jazz Band,King Oliver and His Creole Jazz Band Selected Favorites,170000,"['opm']",1940
 Laughter In The Rain,Neil Sedaka,The Definitive Collection,170067,"['desi pop', 'filmi', 'hindi hip hop', 'modern bollywood', 'sufi']",1940
 Shining Star,"Earth, Wind & Fire",That's The Way Of The World,170160,"['contemporary country', 'country', 'country road', 'oklahoma country']",1940
 Don't Let Your Deal Go Down Blues (with The North Carolina Ramblers) - 78rpm Version,Various Artists,The Best Of Can't You Hear Me Callin' - Bluegrass: 80 Years Of American Music,170267,"['latin', 'latin arena pop', 'latin pop', 'mexican pop']",1940
@@ -257,7 +256,7 @@ Copenhagen,Fletcher Henderson,The Fletcher Henderson Story: A Study in Frustrati
 Lovesick Blues,Emmett Miller,The 1928-1929 Okeh Recordings,173040,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1940
 Good Enough to Keep (Air Mail Special),Benny Goodman,The Real Benny Goodman,173293,"['latin', 'latin hip hop', 'puerto rican pop', 'reggaeton', 'trap latino', 'tropical']",1940
 Worried Life Blues,Various Artists,Eric Clapton's Jukebox,173440,"['latin', 'latin hip hop', 'reggaeton', 'reggaeton flow', 'trap latino', 'tropical']",1940
-Handful of Keys - Remastered 2000,Fats Waller,Fats Waller: Very Best of Fats Waller,173667,['k-rap'],1940
+Handful of Keys - Remastered 2000,Fats Waller,Fats Waller: Very Best of Fats Waller,173667,"['k-rap']",1940
 I Love you (For Sentimental Reasons),Nat King Cole,The Essence of Nat King Cole,173733,"['cancion melodica', 'latin', 'latin pop', 'mariachi', 'ranchera', 'regional mexican']",1940
 Asa Branca,Various Artists,Brésil Nordeste's Song 1928-1950,174067,"['funk', 'funk rock', 'minneapolis sound', 'motown', 'synth funk']",1940
 Pan American Blues,Various Artists,Vintage Novelty Songs,174467,"['desi pop', 'filmi', 'modern bollywood', 'sufi']",1940
@@ -266,7 +265,7 @@ Matchbox Blues,Blind Lemon Jefferson,Blind Lemon Jefferson (The Big Blues Collec
 Smoke! Smoke! Smoke! (That Cigarette),Tex Williams,Vintage Collections,174693,"['k-pop', 'k-pop girl group']",1940
 Night,Jackie Wilson,"A Woman, A Lover, A Friend",174720,"['k-pop', 'k-pop boy group']",1940
 Wabash Cannon Ball,Various Artists,Top Hits Of The 1930s,174733,"['pop', 'pop rap', 'r&b']",1940
-I Love Rock 'N Roll,Joan Jett & The Blackhearts,I Love Rock 'N' Roll (Expanded Edition),175173,['brooklyn drill'],1940
+I Love Rock 'N Roll,Joan Jett & The Blackhearts,I Love Rock 'N' Roll (Expanded Edition),175173,"['brooklyn drill']",1940
 Angel in Your Arms - Single Version,Various Artists,Hit Singles 1958-1977,175547,"['banda', 'grupera', 'norteno', 'ranchera', 'regional mexican']",1940
 Cake Walking Babies (From Home),Louis Armstrong,Louis Armstrong: Portrait Of The Artist As A Young Man 1923-1934,175573,"['cantautor', 'latin', 'latin arena pop', 'latin pop', 'mexican pop', 'rock en espanol', 'spanish pop']",1940
 Why Don't You Believe Me - Remastered,Joni James,The Pop Queen (Remastered),176093,"['alternative metal', 'canadian rock', 'nu metal', 'post-grunge']",1940
