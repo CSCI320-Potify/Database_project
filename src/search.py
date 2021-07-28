@@ -67,10 +67,10 @@ def searchConditions(term):
     while True:
         print(f"Enter song {term} (3 or more characters) | 'q!' to go back: ")
         search = input().strip()
-        if len(search.strip()) < 3:
-            print("Please enter 3 or more characters.")
-        elif search == "q!":
+        if search == "q!":
             return "NULL"
+        elif len(search.strip()) < 3:
+            print("Please enter 3 or more characters.")
         else:
             search = '%' + search + '%'
             break
@@ -104,6 +104,7 @@ def displayPages(song_num):
     if descending == False:
         cursor.execute('SELECT * FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
     else:
+        print("Hoot")
         cursor.execute('SELECT * FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s DESC', (song_num, [orderby]))
     songs = cursor.fetchall()
 
