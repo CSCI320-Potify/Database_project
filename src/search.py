@@ -76,20 +76,19 @@ def searchConditions(term):
             break
     return search
 
-def sortBy():
-    pass
+"""
+@param sort determines how the songs are sorted in the page results
+either by title, artist, genre, or release date ascending or descending
 
+@return song's name, artist name, album, length, and listen count
 """
-Private. Songs will only be displayed in pages of 10 or less songs.
-User can only go forward in pages, but not backwards.
-"""
-def displayPages(song_num):
+def sortBy(sort, song_num):
+    orderby = "Title"
+    descending = False
+
     connection = connect()
     cursor = connection.cursor()
 
-    sort = sortByVerification()
-    orderby = "Title"
-    descending = False
     if len(sort) > 0:
         method = sort[0]
         if sort[-1] == 'd':
@@ -101,14 +100,45 @@ def displayPages(song_num):
         elif method == 2:
             orderby = "release_date"
     
-    if descending == False:
-        cursor.execute('SELECT * FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
-    else:
-        print("Hoot")
-        cursor.execute('SELECT * FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s DESC', (song_num, [orderby]))
+    cursor.execute('SELECT "Title", length, release_date FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
     songs = cursor.fetchall()
 
+    # artist name
+    cursor.execute('SELECT artist_num FROM "artist-song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
+    artist_num = cursor.fetchall()
+    cursor.execute('SELECT name FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY %s', (artist_num, [orderby]))
+    artist_name = cursor.fetchall()
+
+    # album name
+    cursor.execute('SELECT album_num FROM "song-album" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
+    album_num = cursor.fetchall()
+    cursor.execute('SELECT name FROM "album" WHERE "album_num" = ANY(%s) ORDER BY %s', (album_num, [orderby]))
+    album_name = cursor.fetchall()
+
+    # play count
+    cursor.execute('SELECT play_count FROM "user-song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
+    play_count = cursor.fetchall()
+    
+    if descending == True:
+        songs.reverse()
+        artist_name.reverse()
+        album_name.reverse()
+        play_count.reverse()
+
     connection.close()
+    
+    return songs, artist_name, album_name, play_count
+    
+
+"""
+Private. Songs will only be displayed in pages of 10 or less songs.
+User can only go forward in pages, but not backwards.
+"""
+def displayPages(song_num):
+    sort = sortByVerification()
+    songs = sortBy(sort, song_num)
+
+    for song in songs: print(song)
 
     if len(songs) == 0:
         print("No results")
@@ -120,7 +150,7 @@ def displayPages(song_num):
         for song in songs: # TODO formatting based on DB and other tables
             """   
             """
-            print(song)
+            # print(song)
         if page != pages: # last page
             while True:
                 print("Next page? (y|n)")
@@ -137,7 +167,7 @@ Validifies the method of sorting song. (0 | 1 | 2) & (d |  )
 """
 def sortByVerification():
     while True:
-        print("Sort by (default alphabetically by title): [artist(0) | genre(1) | release year(2)] |x    [descending(d)]")
+        print("Sort by (default alphabetically by title): [artist(0) | genre(1) | release year(2)] | [descending(d)]")
         sort = input().strip()
         regexp = compile(r"(0|1|2| )?(d| )?")
         if regexp.search(sort) != None:

@@ -4,8 +4,8 @@ from src.search import searchSong, searchUser
 from src.Music_import import csv_import
 
 def main():
-    csv_import("top1000_songs.csv")
-    #populateTestData()
+    # csv_import("top1000_songs.csv")
+    populateTestData()
     current_user = ''
     print("Welcome to Potify")
     print("Select one of the following options")

@@ -268,6 +268,6 @@ def populateTestData():
     cursor = connection.cursor()
     with open(sql_query, 'r') as file:
         cursor.execute(file.read())
-    connection.commit()
+    # connection.commit()
     connection.close()
 
