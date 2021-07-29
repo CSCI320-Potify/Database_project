@@ -138,7 +138,7 @@ def sortBy(sort, song_num):
         songs[song_num] = song
 
     connection.close()
-    
+
     return songs, order
     
 
@@ -158,12 +158,17 @@ def displayPages(song_num):
     song_ptr = 0
     for page in range(pages + 1):
         print("Page", str(page))
-        print("{:<10}{:<10}{:<10}{:<5}{:<6}".format("Title", "Artist", "Album", "Release Date", "Play Count"))
-        print("-" * 43)
-        for num in order: # TODO formatting based on DB and other tables
-            print(songs.get(num))
-            #print("{:<10}{:<10}{:<10}{:<5}{:<6}".format(songs
-            #song_ptr += 1
+        print("Title, Artist, Album, Length, Listen Count") 
+        while True: 
+            song = songs[order[song_ptr]]
+            min, sec = divmod(song[3], 60000)
+            time = "{:02d}:{:02d}".format(min, int(sec / 1000))
+            print(f"{song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
+            song_ptr = song_ptr + 1
+            if (song_ptr % 10) == 0: 
+                break
+            elif song_ptr == len(order) - 1: # displays max 10 songs per page
+                break
         if page != pages: # last page
             while True:
                 print("Next page? (y|n)")
