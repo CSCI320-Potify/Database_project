@@ -79,10 +79,14 @@ def searchConditions(term):
 """
 @param sort determines how the songs are sorted in the page results
 either by title, artist, genre, or release date ascending or descending
+songs will be stored in a dictionary:
+song_num: (title, artist, album, release_date, listen_count)
 
 @return song's name, artist name, album, length, and listen count
 """
 def sortBy(sort, song_num):
+    songs = {}
+
     orderby = "Title"
     descending = False
 
@@ -99,35 +103,43 @@ def sortBy(sort, song_num):
             orderby = "genre"
         elif method == 2:
             orderby = "release_date"
-    
-    cursor.execute('SELECT "Title", length, release_date FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
-    songs = cursor.fetchall()
 
-    # artist name
-    cursor.execute('SELECT artist_num FROM "artist-song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
-    artist_num = cursor.fetchall()
-    cursor.execute('SELECT name FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY %s', (artist_num, [orderby]))
-    artist_name = cursor.fetchall()
+    cursor.execute('SELECT song_num FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
+    order = [r[0] for r in cursor.fetchall()]
 
-    # album name
-    cursor.execute('SELECT album_num FROM "song-album" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
-    album_num = cursor.fetchall()
-    cursor.execute('SELECT name FROM "album" WHERE "album_num" = ANY(%s) ORDER BY %s', (album_num, [orderby]))
-    album_name = cursor.fetchall()
-
-    # play count
-    cursor.execute('SELECT play_count FROM "user-song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
-    play_count = cursor.fetchall()
-    
     if descending == True:
-        songs.reverse()
-        artist_name.reverse()
-        album_name.reverse()
-        play_count.reverse()
+        order.reverse()
+    
+    for song_num in order:
+        cursor.execute(f'SELECT "Title", "length" FROM "song" WHERE "song_num" = {song_num}')
+        title, length = cursor.fetchone()
+
+        # artist name
+        cursor.execute(f'SELECT artist_num FROM "artist-song" WHERE "song_num" = {song_num}')        
+        artist_num = cursor.fetchone()[0]
+        cursor.execute(f'SELECT name FROM "artist" WHERE "artist_num" = {artist_num}')
+        artist_name = cursor.fetchone()[0]
+
+        # album name
+        cursor.execute(f'SELECT album_num FROM "song-album" WHERE "song_num" = {song_num}')
+        album_num = cursor.fetchone()[0]
+        cursor.execute(f'SELECT name FROM "album" WHERE "album_num" = {album_num}')
+        album_name = cursor.fetchone()[0]
+
+        # play count
+        cursor.execute(f'SELECT play_count FROM "user-song" WHERE "song_num" = {song_num}')
+        temp = cursor.fetchone()
+        if temp is None:
+            play_count = 0
+        else:
+            play_count = temp[0]
+
+        song = (title, artist_name, album_name, length, play_count)
+        songs[song_num] = song
 
     connection.close()
     
-    return songs, artist_name, album_name, play_count
+    return songs, order
     
 
 """
@@ -136,21 +148,22 @@ User can only go forward in pages, but not backwards.
 """
 def displayPages(song_num):
     sort = sortByVerification()
-    songs = sortBy(sort, song_num)
-
-    for song in songs: print(song)
+    songs, order = sortBy(sort, song_num)
 
     if len(songs) == 0:
         print("No results")
         return
     
     pages = int(len(songs) / 10)
+    song_ptr = 0
     for page in range(pages + 1):
         print("Page", str(page))
-        for song in songs: # TODO formatting based on DB and other tables
-            """   
-            """
-            # print(song)
+        print("{:<10}{:<10}{:<10}{:<5}{:<6}".format("Title", "Artist", "Album", "Release Date", "Play Count"))
+        print("-" * 43)
+        for num in order: # TODO formatting based on DB and other tables
+            print(songs.get(num))
+            #print("{:<10}{:<10}{:<10}{:<5}{:<6}".format(songs
+            #song_ptr += 1
         if page != pages: # last page
             while True:
                 print("Next page? (y|n)")
@@ -210,9 +223,8 @@ def searchForSong(term):
                 break
         cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" LIKE ')
         """
-        
-    song_num = [r[0] for r in cursor.fetchall()]
 
+    song_num = cursor.fetchall()
     displayPages(song_num)
 
     connection.close()
