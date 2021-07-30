@@ -79,14 +79,10 @@ def searchConditions(term):
 """
 @param sort determines how the songs are sorted in the page results
 either by title, artist, genre, or release date ascending or descending
-songs will be stored in a dictionary:
-song_num: (title, artist, album, release_date, listen_count)
 
-@return song's name, artist name, album, length, and listen count
+@return the order that songs will be displayed
 """
-def sortBy(sort, song_num):
-    songs = {}
-
+def getSongOrder(sort, song_num):
     orderby = "Title"
     descending = False
 
@@ -109,7 +105,19 @@ def sortBy(sort, song_num):
 
     if descending == True:
         order.reverse()
-    
+
+    return order
+
+"""
+Will return a dictonary up to 10 songs.
+song_num : (title, artist, album, length, play_count)
+"""
+def getTenSongs(order, song_ptr):
+    songs = {}
+
+    connection = connect()
+    cursor = connection.cursor()
+    order = order[song_ptr:]
     for song_num in order:
         cursor.execute(f'SELECT "Title", "length" FROM "song" WHERE "song_num" = {song_num}')
         title, length = cursor.fetchone()
@@ -136,10 +144,14 @@ def sortBy(sort, song_num):
 
         song = (title, artist_name, album_name, length, play_count)
         songs[song_num] = song
+        song_ptr += 1
+        if song_ptr % 10 == 0:
+            break
+
 
     connection.close()
 
-    return songs, order
+    return songs, song_ptr
     
 
 """
@@ -148,27 +160,22 @@ User can only go forward in pages, but not backwards.
 """
 def displayPages(song_num):
     sort = sortByVerification()
-    songs, order = sortBy(sort, song_num)
+    order = getSongOrder(sort, song_num)
 
-    if len(songs) == 0:
+    if len(order) == 0:
         print("No results")
         return
     
-    pages = int(len(songs) / 10)
+    pages = int(len(order) / 10)
     song_ptr = 0
     for page in range(pages + 1):
+        songs, song_ptr = getTenSongs(order, song_ptr)
         print("Page", str(page))
         print("Title, Artist, Album, Length, Listen Count") 
-        while True: 
-            song = songs[order[song_ptr]]
+        for song in songs.values(): 
             min, sec = divmod(song[3], 60000)
             time = "{:02d}:{:02d}".format(min, int(sec / 1000))
             print(f"{song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
-            song_ptr = song_ptr + 1
-            if (song_ptr % 10) == 0: 
-                break
-            elif song_ptr == len(order) - 1: # displays max 10 songs per page
-                break
         if page != pages: # last page
             while True:
                 print("Next page? (y|n)")
@@ -210,12 +217,12 @@ def searchForSong(term):
     elif term == "artist":
         cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" LIKE %s', ([search]))
         artist_num = cursor.fetchall()
-        cursor.execute(f'SELECT "song_num" FROM "artist_song" WHERE "artist_num" IN {artist_num}')
+        cursor.execute('SELECT "song_num" FROM "artist_song" WHERE "artist_num" = ANY(%s)', (artist_num),)
 
     elif term == "album":
         cursor.execute('SELECT "album_num" FROM "album" WHERE "name" LIKE %s', ([search]))
         album_num = cursor.fetchall()
-        cursor.execute(f'SELECT "song_num" FROM "song-album" WHERE "album_num" IN {album_num}')
+        cursor.execute(f'SELECT "song_num" FROM "song-album" WHERE "album_num" = ANY(%s)', (album_num),)
        
     elif term == "genre": # TODO
         """
