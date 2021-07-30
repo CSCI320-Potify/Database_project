@@ -1,6 +1,5 @@
 from src.db import *
-from re import compile, search
-from search_help import *
+from src.search_help import *
 
 def searchUser(current_user):
     email = input("Enter email of user to search for:")
@@ -36,6 +35,9 @@ def searchUser(current_user):
     print("Returning to options select")
 
 
+"""
+Search for song by title, artist, album, or genre
+"""
 def searchSong():
     while True:
         print('''Search song by:
@@ -78,12 +80,12 @@ def searchForSong(term):
     elif term == "artist":
         cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" LIKE %s', ([search]))
         artist_num = cursor.fetchall()
-        cursor.execute('SELECT "song_num" FROM "artist_song" WHERE "artist_num" = ANY(%s)', (artist_num),)
+        cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = ANY(%s)', (artist_num,))
 
     elif term == "album":
         cursor.execute('SELECT "album_num" FROM "album" WHERE "name" LIKE %s', ([search]))
         album_num = cursor.fetchall()
-        cursor.execute(f'SELECT "song_num" FROM "song-album" WHERE "album_num" = ANY(%s)', (album_num),)
+        cursor.execute(f'SELECT "song_num" FROM "song-album" WHERE "album_num" = ANY(%s)', (album_num,))
        
     elif term == "genre": # TODO
         """
@@ -101,7 +103,6 @@ def searchForSong(term):
     displayPages(song_num)
 
     connection.close()
-
 
 
 """
@@ -136,3 +137,4 @@ def displayPages(song_num):
                     break
                 else:
                     print("Invalid option. Try again.")
+    return

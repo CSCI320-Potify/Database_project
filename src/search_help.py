@@ -1,3 +1,6 @@
+from src.db import *
+from re import compile, search
+
 """
 Private. Ensures that a search term is 3 or more characters long before
 a song can be searched for. 
@@ -15,7 +18,7 @@ def searchConditions(term):
             search = '%' + search + '%'
             break
     return search
-    
+
 
 """
 Validifies the method of sorting song. (0 | 1 | 2) & (d |  )
