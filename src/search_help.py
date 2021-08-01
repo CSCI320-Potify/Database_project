@@ -2,21 +2,40 @@ from src.db import *
 from re import compile, search
 
 """
-Private. Ensures that a search term is 3 or more characters long before
+Private. For title, artist, and album, ensure that a search term is 3 or more characters long before
 a song can be searched for. 
+If genre, then user can search for multiple valid genres
 The term has no trailing white space and is a substring
 """
 def searchConditions(term):
     while True:
-        print(f"Enter song {term} (3 or more characters) | 'q!' to go back: ")
-        search = input().strip()
-        if search == "q!":
-            return "NULL"
-        elif len(search.strip()) < 3:
-            print("Please enter 3 or more characters.")
+        if term == "genre":
+            connection = connect()
+            cursor = connection.cursor()
+            genre_list = []
+            while True:
+                print("Enter in a genre. Press <enter> to add genre. '!q' to finish")
+                genre = input().strip()
+                if genre == "!q":
+                    if len(genre_list) == 0:
+                        return "NULL"
+                    return genre_list
+                cursor.execute('SELECT "id" FROM "genre" WHERE "name" LIKE %s', ([genre]))
+                genre_id = cursor.fetchone()
+                if genre_id is None:
+                    print("Genre doesn't exist. Try again")
+                else:
+                    genre_list.append(genre_id[0])
         else:
-            search = '%' + search + '%'
-            break
+            print(f"Enter song {term} (3 or more characters) | 'q!' to go back: ")
+            search = input().strip()
+            if search == "q!":
+                return "NULL"
+            elif len(search.strip()) < 3:
+                print("Please enter 3 or more characters.")
+            else:
+                search = '%' + search + '%'
+                break
     return search
 
 
@@ -50,11 +69,11 @@ def getSongOrder(sort, song_num):
         method = sort[0]
         if sort[-1] == 'd':
             descending = True
-        if method == 0:
+        if method == 0: # artist
             orderby = "artist"
-        elif method == 1:
+        elif method == 1: # genre
             orderby = "genre"
-        elif method == 2:
+        elif method == 2: # release_date
             orderby = "release_date"
 
     cursor.execute('SELECT song_num FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))

@@ -85,19 +85,12 @@ def searchForSong(term):
     elif term == "album":
         cursor.execute('SELECT "album_num" FROM "album" WHERE "name" LIKE %s', ([search]))
         album_num = cursor.fetchall()
-        cursor.execute(f'SELECT "song_num" FROM "song-album" WHERE "album_num" = ANY(%s)', (album_num,))
+        cursor.execute('SELECT "song_num" FROM "song-album" WHERE "album_num" = ANY(%s)', (album_num,))
        
-    elif term == "genre": # TODO
-        """
-        while True:
-            print("Enter in a genre:")
-            genres = input().strip()
-            if len(genres) == 0:
-                print("Enter at least one genre")
-            else:
-                break
-        cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" LIKE ')
-        """
+    elif term == "genre": 
+        cursor.execute('SELECT "genre_list_id" FROM "genre-genre_list" WHERE "genre_id" = ANY(%s)', (search,))
+        genre_list_id = cursor.fetchall()
+        cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" = ANY(%s)', (genre_list_id,))
 
     song_num = cursor.fetchall()
     displayPages(song_num)
