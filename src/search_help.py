@@ -51,7 +51,46 @@ def sortByVerification():
             return sort
         print("Invalid command.")
 
+"""
+Artist name is sorted alphabetically descending or ascending
+Genre is sorted by genre_id descending or ascending
+"""
+def getArtistGenreOrder(song_num, method, descending):
+    connection = connect()
+    cursor = connection.cursor()
 
+    if method == '0': # artist
+        cursor.execute('SELECT "artist_num" FROM "artist-song" WHERE "song_num" = ANY(%s)', (song_num,))
+        artist_num = cursor.fetchall()
+        cursor.execute('SELECT "name" FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY "name"' , (artist_num,))
+        artist = cursor.fetchall()
+        cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" = ANY(%s) ORDER BY "name"', (artist,))
+        artist_num = cursor.fetchall()
+        order = []
+        for num in artist_num:
+            cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = %s AND "song_num" = ANY(%s)', 
+            (num, song_num))
+            order.append(cursor.fetchone()[0])
+    elif method == '1': # genre
+        cursor.execute('SELECT "genre_list" FROM "song-genre" WHERE "song_num" = ANY(%s)', (song_num,))
+        genre_list_id = cursor.fetchall()
+        cursor.execute('SELECT "genre_id", "genre_list_id" FROM "genre-genre_list" WHERE "genre_list_id" = ANY(%s) ORDER BY "genre_id"', 
+        [genre_list_id])
+        genre_id = cursor.fetchall()
+        order = []
+        for genre, id in genre_id:
+            cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" = %s', [id])
+            order.append(cursor.fetchone()[0])
+        order = list(dict.fromkeys(order))
+
+    connection.close()
+    
+    if descending == True:
+        order.reverse()
+    
+    return order
+
+    
 """
 @param sort determines how the songs are sorted in the page results
 either by title, artist, genre, or release date ascending or descending
@@ -64,36 +103,25 @@ def getSongOrder(sort, song_num):
     connection = connect()
     cursor = connection.cursor()
 
+    print("Obtaining order...")
     if len(sort) > 0:
         method = sort[0]
+        
         if sort[-1] == 'd':
             descending = True
-        if method == '0': # artist
-            cursor.execute('SELECT "artist_num" FROM "artist-song" WHERE "song_num" = ANY(%s)', (song_num,))
-            artist_num = cursor.fetchall()
-            cursor.execute('SELECT "name" FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY "name"' , (artist_num,))
-            artist = cursor.fetchall()
-            cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" = ANY(%s) ORDER BY "name"', (artist,))
-            artist_num = cursor.fetchall()
-            order = []
-            for num in artist_num:
-                cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = %s AND "song_num" = ANY(%s)', 
-                (num, song_num))
-                order.append(cursor.fetchone()[0])
-            if descending == True:
-                order.reverse()
-            return order
-        elif method == '1': # genre
-            orderby = "genre"
+        if int(method == '0') | int(method == '1'): # artist and genre
+            return getArtistGenreOrder(song_num, method, descending)
         elif method == '2': # release_date
             cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "release_date"', (song_num,))
         else:
             cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "Title"', (song_num,))
     else:
         cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "Title"', (song_num,))
-        
+    print("Order obtained.")
 
     order = [r[0] for r in cursor.fetchall()]
+
+    connection.close()
 
     if descending == True:
         order.reverse()
@@ -145,5 +173,3 @@ def getTenSongs(order, song_ptr):
     connection.close()
 
     return songs, song_ptr
-
-
