@@ -73,9 +73,16 @@ def getSongOrder(sort, song_num):
             artist_num = cursor.fetchall()
             cursor.execute('SELECT "name" FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY "name"' , (artist_num,))
             artist = cursor.fetchall()
-            cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" = ANY(%s)', (artist,))
+            cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" = ANY(%s) ORDER BY "name"', (artist,))
             artist_num = cursor.fetchall()
-            cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = ANY(%s)', (artist_num,))
+            order = []
+            for num in artist_num:
+                cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = %s AND "song_num" = ANY(%s)', 
+                (num, song_num))
+                order.append(cursor.fetchone()[0])
+            if descending == True:
+                order.reverse()
+            return order
         elif method == '1': # genre
             orderby = "genre"
         elif method == '2': # release_date
