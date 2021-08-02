@@ -59,7 +59,6 @@ either by title, artist, genre, or release date ascending or descending
 @return the order that songs will be displayed
 """
 def getSongOrder(sort, song_num):
-    orderby = "Title"
     descending = False
 
     connection = connect()
@@ -69,14 +68,24 @@ def getSongOrder(sort, song_num):
         method = sort[0]
         if sort[-1] == 'd':
             descending = True
-        if method == 0: # artist
-            orderby = "artist"
-        elif method == 1: # genre
+        if method == '0': # artist
+            cursor.execute('SELECT "artist_num" FROM "artist-song" WHERE "song_num" = ANY(%s)', (song_num,))
+            artist_num = cursor.fetchall()
+            cursor.execute('SELECT "name" FROM "artist" WHERE "artist_num" = ANY(%s) ORDER BY "name"' , (artist_num,))
+            artist = cursor.fetchall()
+            cursor.execute('SELECT "artist_num" FROM "artist" WHERE "name" = ANY(%s)', (artist,))
+            artist_num = cursor.fetchall()
+            cursor.execute('SELECT "song_num" FROM "artist-song" WHERE "artist_num" = ANY(%s)', (artist_num,))
+        elif method == '1': # genre
             orderby = "genre"
-        elif method == 2: # release_date
-            orderby = "release_date"
+        elif method == '2': # release_date
+            cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "release_date"', (song_num,))
+        else:
+            cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "Title"', (song_num,))
+    else:
+        cursor.execute('SELECT "song_num" FROM "song" WHERE "song_num" = ANY(%s) ORDER BY "Title"', (song_num,))
+        
 
-    cursor.execute('SELECT song_num FROM "song" WHERE "song_num" = ANY(%s) ORDER BY %s', (song_num, [orderby]))
     order = [r[0] for r in cursor.fetchall()]
 
     if descending == True:

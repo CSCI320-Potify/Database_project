@@ -63,7 +63,8 @@ def searchSong():
 
 
 """
-Song search by title will take 3 or more characters as input and finds all songs
+Searches for songs based on what the user has input.
+Search for genre looks for songs that have any of the inputted genres.
 that includes the input. 
 """
 def searchForSong(term):
