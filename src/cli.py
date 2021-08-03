@@ -239,7 +239,8 @@ def collections(user):
         print("5: Play a collection")
         print("6: Rename a collection")
         print("7: View all collections")
-        print("8: Go back")
+        print("8: Reccomendations")
+        print("9: Go back")
         choice = input()
 
         if choice == "1":
