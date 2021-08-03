@@ -94,51 +94,40 @@ def searchForSong(term):
         cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" = ANY(%s)', (genre_list_id,))
 
     song_num = cursor.fetchall()
-    return displayPages(song_num)
-
     connection.close()
+    return displayPages(song_num, "add to collection")
 
-
+    
 """
 Private. Songs will only be displayed in pages of 10 or less songs.
 User can only go forward in pages, but not backwards.
 """
-def displayPages(song_num):
-    sort = sortByVerification()
+def displayPages(song_num, action):
+    if action == "add to":
+        sort = sortByVerification()
+    else:
+        sort = ""
     order = getSongOrder(sort, song_num)
 
     if len(order) == 0:
         print("No results")
         return
     
-    pages = int(len(order) / 10)
-    song_ptr = 0
+    pages = showSongs(order)
+
     for page in range(pages + 1):
-        songs, song_ptr, song_list = getTenSongs(order, song_ptr)
-        print("Page", str(page))
-        print("Title, Artist, Album, Length, Listen Count") 
-        count = 0
-        for song in songs.values(): 
-            min, sec = divmod(song[3], 60000)
-            time = "{:02d}:{:02d}".format(min, int(sec / 1000))
-            print(song_ptr)
-            print(str(count) + f": {song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
-            count += 1
-
-
-        while True:
-            print("Select song [0-9] to add to collection")
-            choice = input()
-            if page != pages:
-                print("Next page? (y|n)")  
-                if choice == 'n':
-                    return
-                elif choice == 'y':
-                    break
-            choice = int(choice)
-            if choice >= 0 & choice < 10:
-                song_num = song_list[choice]
-                return song_num
-            else:
-                print("Invalid option. Try again.")
+        print("Select song [0-" + str(order % 10) + "] to " + action + "\n")
+        choice = input()
+        if page != pages:
+            print("Next page? (y|n)")  
+            if choice == 'n':
+                return
+            elif choice == 'y':
+                break
+        choice = int(choice)
+        if choice >= 0 & choice < 10:
+            song_num = order[10 * page + choice]
+            return song_num
+        else:
+            print("Invalid option. Try again.")
     return

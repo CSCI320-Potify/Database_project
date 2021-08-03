@@ -128,6 +128,27 @@ def getSongOrder(sort, song_num):
 
     return order
 
+"""
+Prints out the songs in order
+@param order a list of song_num
+@return pages how many pages of songs will be printed.
+    There's only 10 songs per page
+@return song_list current 10 songs
+"""
+def showSongs(order):
+    pages = int(len(order) / 10)
+    song_ptr = 0
+    for page in range(pages + 1):
+        songs, song_ptr = getTenSongs(order, song_ptr)
+        print("Page", str(page))    
+        print("Title, Artist, Album, Length, Listen Count") 
+        count = 0
+        for song in songs.values(): 
+            min, sec = divmod(song[3], 60000)
+            time = "{:02d}:{:02d}".format(min, int(sec / 1000))
+            print(str(count) + f": {song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
+            count += 1
+    return pages
 
 """
 Will return a dictonary up to 10 songs.
@@ -135,7 +156,6 @@ song_num : (title, artist, album, length, play_count)
 """
 def getTenSongs(order, song_ptr):
     songs = {}
-    song_list = []
 
     connection = connect()
     cursor = connection.cursor()
@@ -166,11 +186,10 @@ def getTenSongs(order, song_ptr):
 
         song = (title, artist_name, album_name, length, play_count)
         songs[song_num] = song
-        song_list.append(song_num)
         song_ptr += 1
         if song_ptr % 10 == 0:
             break
 
     connection.close()
 
-    return songs, song_ptr, song_list
+    return songs, song_ptr

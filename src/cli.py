@@ -1,4 +1,5 @@
-from src.search import searchSong
+from src.search_help import showSongs
+from src.search import displayPages, searchSong
 from src.db import *
 import datetime
 
@@ -14,7 +15,10 @@ def find_collection(user, action):
         connection.close()
         return "NULL"
     while True:
-        cursor.execute('SELECT "name", collection_num FROM "collection" WHERE username=%s', ([user]))
+        if action == "delete":
+            cursor.execute('SELECT "name", collection_num FROM "collection" WHERE username=%s AND "num_of_songs" > 0', ([user]))
+        else:
+            cursor.execute('SELECT "name", collection_num FROM "collection" WHERE username=%s', ([user]))
         collection = cursor.fetchall()
         connection.close()
         for i in range(len(collection)):
@@ -84,8 +88,8 @@ def create_collection(user):
         cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
         exists = cursor.fetchone()[0]
         if exists == 0:
-            cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
-            if cursor.fetchone()[0] == 0: # if user has no collections
+            cursor.execute('SELECT COUNT(*) FROM "collection"')
+            if cursor.fetchone()[0] == 0: # if there are no collections
                 new_num = 0
             else:
                 cursor.execute('SELECT MAX(collection_num) FROM "collection"')
@@ -103,27 +107,28 @@ def delete_from_collection(user): # TODO
     cursor = connection.cursor()
     collection_id = find_collection(user, "delete")
     if collection_id != "NULL":
-        song = input("What is the name of the song you wish to delete?\n")
-        if song == "quit":
-            return
-        cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
-        song_nu = cursor.fetchone()[0]
-        cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-        collect_nu = cursor.fetchone()[0]
-        cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+        cursor.execute('SELECT "song_num" FROM "collection-song" WHERE "Collection_num" = %s', ([collection_id]))
+        song_nums = cursor.fetchall()
+        song_num = displayPages(song_nums, "delete song")
+        
+        cursor.execute('SELECT "Title" FROM "song" WHERE "song_num" = %s', ([song_num]))
+        title = cursor.fetchone()[0]
+        cursor.execute('SELECT "name" FROM "collection" WHERE "collection_num" = %s', ([collection_id]))
+        collection_name = cursor.fetchone()[0]
+        cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collection_id, song_num))
         song_exists = cursor.fetchone()[0]
         if song_exists > 0:
-            cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
+            cursor.execute('SELECT length FROM "song" WHERE "song_num"=%s', ([song_num]))
             length = cursor.fetchone()[0]
-            cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+            cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collection_id, song_num))
             connection.commit()
-            cursor.execute('UPDATE "collection" SET duration = duration - %s WHERE "collection_num" = %s', (length, collect_nu))
+            cursor.execute('UPDATE "collection" SET duration = duration - %s WHERE "collection_num" = %s', (length, collection_id))
             connection.commit()
-            cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs - 1 WHERE "collection_num" = %s', ([collect_nu]))
+            cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs - 1 WHERE "collection_num" = %s', ([collection_id]))
             connection.commit()
-            print("Song successfully deleted!")
+            print(title, "successfully deleted!")
         else:
-            print("This song was not found.")
+            print(title, "was not found in collection", collection_name)
 
     connection.close()
 
@@ -208,7 +213,7 @@ def rename_collection(user):
 """
 Prints view of collection in the following format:
 
-ID name                num_of_songs  length
+ID name                length  number_of_songs
 ---------------------------------------------
 
 id cannot exceed 99 and name cannot be of length greater than 19
@@ -219,13 +224,16 @@ def view_collections(user):
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM "collection" WHERE username=%s ORDER BY name ASC', ([user]))
     all_collections = cursor.fetchall()
-    print("{:<3}{:<20}{:<14}{:<6}".format("id", "name", "num_of_songs", "length" ))
+    print("{:<3}{:<20}{:<10}{:<6}".format("id", "name", "length", "num_of_songs" ))
     print("-" * 45)
     if len(all_collections) == 0:
         print("<No collections>")
     else:
         for collection in all_collections:
-            print("{:^3}{:<20}{:<14}{:<6}".format(collection[1], collection[0], collection[2], collection[3]))
+            min, sec = divmod(collection[2], 60000)
+            hour, min = divmod(min, 60)
+            time = "{:d}:{:02d}:{:02d}".format(hour, min, int(sec / 1000))
+            print("{:^3}{:<20}{:<10}{:<6}".format(collection[1], collection[0], time, collection[3]))
     connection.close()
 
 
