@@ -192,30 +192,23 @@ and contain the same name as a pre-existing collection under the same user
 def rename_collection(user):
     connection = connect()
     cursor = connection.cursor()
-    collect = input("What is the name of the collection you wish to rename?\n")
-    if collect == "quit":
+    collection_num = find_collection(user, "rename")
+    while True:
+        rename = input("What is the new name you wish to give it? ('!q' to quit)\n")
+        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE "collection_num"=%s AND username=%s', (collection_num, user))
+        if len(rename.strip()) == 0:
+            print("Invalid name. Please try again.")
+        elif len(rename.strip()) > 19:
+            print("New name is too long - must be less than 19 characters. Try again.")
+        elif cursor.fetchone()[0] == 1:
+            print("Collection of", rename, "already exists. Choose another name.")
+        else:
+            break
+    if rename == "!q":
         return
-    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-    exists = cursor.fetchone()[0]
-    if exists > 0:
-        while True:
-            rename = input("What is the new name you wish to give it?\n")
-            cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (rename, user))
-            if len(rename.strip()) == 0:
-                print("Invalid name. Please try again.")
-            elif len(rename.strip()) > 19:
-                print("New name is too long - must be less than 19 characters. Try again.")
-            elif cursor.fetchone()[0] == 1:
-                print("Collection of", rename, "already exists. Choose another name.")
-            else:
-                break
-        if rename == "quit":
-            return
-        cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collect, user))
-        connection.commit()
-        print("Collection successfully renamed!")
-    else:
-        print("This collection was not found.")
+    cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collect, user))
+    connection.commit()
+    print("Collection successfully renamed!")
     connection.close()
 
 """
