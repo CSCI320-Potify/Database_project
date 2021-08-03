@@ -26,12 +26,28 @@ def main():
 
     if current_user != '':
         print("Welcome Back " + current_user)
+        connection = connect()
+        cursor = connection.cursor()
+        cursor.execute('SELECT COUNT(*) from "collection" WHERE username=%s', [current_user])
+        collect_amt = cursor.fetchone()[0]
+        print("You have", collect_amt, "collections.")
+        cursor.execute('SELECT COUNT(*) from "friends" WHERE follows=%s', [current_user])
+        followers = cursor.fetchone()[0]
+        print("You have", followers, "followers.")
+        cursor.execute('SELECT COUNT(*) from "friends" WHERE "user"=%s', [current_user])
+        following = cursor.fetchone()[0]
+        if following == 1:
+            print("You are following 1 person.")
+        else:
+            print("You are following", following, "people.")
+        print("Your top 10 artists are - \n")
         while True:
             print("Select one of the 1 following options")
             print("1: Find songs - WARNING WILL LOOP")
             print("2: Find Users")
             print("3: Collections submenu")
-            print("4: quit")
+            print("4: Recommendations")
+            print("5: quit")
             choice = input()
             if choice == "1":
                 searchSong()
@@ -40,6 +56,8 @@ def main():
             elif choice == "3":
                 collections(current_user)
             elif choice == "4":
+                Recommendation(current_user)
+            elif choice == "5":
                 quit()
             else:
                 print("Unknown command")
