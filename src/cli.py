@@ -136,12 +136,21 @@ Deletes a collection. Also proceeds to delete every song in collection
 def delete_collection(user):
     connection = connect()
     cursor = connection.cursor()
-    collection_num = find_collection((user, "delete"))
+    collection_num = find_collection(user, "delete")
     if collection_num == "NULL":
         return
-    cursor.execute('DELETE FROM "collection" WHERE name=%s AND username=%s', (collection_num, user))
-    cursor.execute('SELECT "name" FROM "collection" WHERE "collection_num" = %s', ([collection_num]))
+    cursor.execute('SELECT "song_num" FROM "collection-song" WHERE "Collection_num" = %s', ([collection_num]))
+    song_nums = cursor.fetchall()
+    for num in song_nums:
+        cursor.execute('SELECT "Title" FROM "song" WHERE "song_num" = %s', ([num]))
+        title = cursor.fetchone()[0]
+        cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collection_num, num))
+        print(title, "has been deleted")
+        connection.commit()
+    cursor.execute('SELECT "name" FROM "collection" WHERE "collection_num" = %s AND username = %s', (collection_num, user))
     name = cursor.fetchone()[0]
+    cursor.execute('DELETE FROM "collection" WHERE "collection_num"=%s AND username=%s', (collection_num, user))
+    
     connection.commit()
     print(name, "successfully deleted!")
 
