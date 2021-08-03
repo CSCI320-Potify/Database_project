@@ -247,7 +247,7 @@ def collections(user):
         print("5: Play a collection")
         print("6: Rename a collection")
         print("7: View all collections")
-        print("8: Reccomendations")
+        print("8: Recommendations")
         print("9: Go back")
         choice = input()
 
@@ -266,6 +266,8 @@ def collections(user):
         elif choice == "7":
             view_collections(user)
         elif choice == "8":
+            break
+        elif choice == "9":
             break
         else:
             print("Unknown command")
