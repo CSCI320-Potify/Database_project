@@ -49,18 +49,18 @@ def searchSong():
         ''')
         choice = input()
         if choice == '0':
-            searchForSong("title")
+            num = searchForSong("title")
         elif choice == '1':
-            searchForSong("artist")
+            num = searchForSong("artist")
         elif choice == '2':
-            searchForSong("album")
+            num = searchForSong("album")
         elif choice == '3':
-            searchForSong("genre") # TODO 
+            num = searchForSong("genre") 
         elif choice == '9':
             return
         else:
             print("Invalid command. Try again.")
-
+        return num
 
 """
 Searches for songs based on what the user has input.
@@ -70,7 +70,7 @@ that includes the input.
 def searchForSong(term):
     search = searchConditions(term)
     if search == "NULL":
-        return
+        return "NULL"
 
     connection = connect()
     cursor = connection.cursor()
@@ -94,7 +94,7 @@ def searchForSong(term):
         cursor.execute('SELECT "song_num" FROM "song-genre" WHERE "genre_list" = ANY(%s)', (genre_list_id,))
 
     song_num = cursor.fetchall()
-    displayPages(song_num)
+    return displayPages(song_num)
 
     connection.close()
 
@@ -114,21 +114,31 @@ def displayPages(song_num):
     pages = int(len(order) / 10)
     song_ptr = 0
     for page in range(pages + 1):
-        songs, song_ptr = getTenSongs(order, song_ptr)
+        songs, song_ptr, song_list = getTenSongs(order, song_ptr)
         print("Page", str(page))
         print("Title, Artist, Album, Length, Listen Count") 
+        count = 0
         for song in songs.values(): 
             min, sec = divmod(song[3], 60000)
             time = "{:02d}:{:02d}".format(min, int(sec / 1000))
-            print(f"{song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
-        if page != pages: # last page
-            while True:
-                print("Next page? (y|n)")
-                choice = input()
+            print(song_ptr)
+            print(str(count) + f": {song[0]}, {song[1]}, {song[2]}, {time}, {song[4]}") 
+            count += 1
+
+
+        while True:
+            print("Select song [0-9] to add to collection")
+            choice = input()
+            if page != pages:
+                print("Next page? (y|n)")  
                 if choice == 'n':
                     return
                 elif choice == 'y':
                     break
-                else:
-                    print("Invalid option. Try again.")
+            choice = int(choice)
+            if choice >= 0 & choice < 10:
+                song_num = song_list[choice]
+                return song_num
+            else:
+                print("Invalid option. Try again.")
     return

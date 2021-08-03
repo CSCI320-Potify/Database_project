@@ -28,7 +28,7 @@ def main():
         print("Welcome Back " + current_user)
         while True:
             print("Select one of the 1 following options")
-            print("1: Find songs")
+            print("1: Find songs - WARNING WILL LOOP")
             print("2: Find Users")
             print("3: Collections submenu")
             print("4: quit")

@@ -135,6 +135,7 @@ song_num : (title, artist, album, length, play_count)
 """
 def getTenSongs(order, song_ptr):
     songs = {}
+    song_list = []
 
     connection = connect()
     cursor = connection.cursor()
@@ -165,11 +166,11 @@ def getTenSongs(order, song_ptr):
 
         song = (title, artist_name, album_name, length, play_count)
         songs[song_num] = song
+        song_list.append(song_num)
         song_ptr += 1
         if song_ptr % 10 == 0:
             break
 
-
     connection.close()
 
-    return songs, song_ptr
+    return songs, song_ptr, song_list

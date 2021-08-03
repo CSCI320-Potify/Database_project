@@ -1,50 +1,60 @@
+from src.search import searchSong
 from src.db import *
 import datetime
 
 """
-Adds a song based on its name to the user's collection
+Finds collection if a user has a collection and returns its collection id
 """
-def add_to_collection(user):
+def find_collection(user, action):
     connection = connect()
     cursor = connection.cursor()
     cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
     if cursor.fetchone()[0] == 0:
         print("There are no collections. Create a collection first.")
-        return
+        connection.close()
+        return "NULL"
     while True:
-        collect = input("What is the name of the collection you wish to add to?\n")
-        if collect == "quit":
-            break
-        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-        find_col = cursor.fetchone()[0]
-        if find_col > 0:
-            cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-            col_num = cursor.fetchone()[0]
-            song = input("What is the name of the song you wish to add to " + collect + "?\n")
-            if song == "quit":
-                break
-            cursor.execute('SELECT COUNT("Title") FROM "song" WHERE "Title"=%s', ([song]))
-            find_song = cursor.fetchone()[0]
-            if find_song > 0:
-                cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
-                song_nu = cursor.fetchone()[0]
-                cursor.execute('SELECT COUNT("song_num") FROM "collection-song" WHERE "Collection_num"=%s AND "song_num"=%s', (col_num, song_nu))
-                song_exists = cursor.fetchone()[0]
-                if song_exists == 0:
-                    cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
-                    length = cursor.fetchone()[0]
-                    cursor.execute('INSERT INTO "collection-song"("Collection_num", "song_num") VALUES (%s, %s)', (col_num, song_nu))
-                    connection.commit()
-                    cursor.execute('UPDATE "collection" SET duration = duration + %s WHERE "collection_num" = %s', (length, col_num))
-                    connection.commit()
-                    cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs + 1 WHERE "collection_num" = %s', ([col_num]))
-                    connection.commit()
-                else:
-                    print("This song is already in the collection.")
-            else:
-                print("The specified song was not found.")
+        cursor.execute('SELECT "name", collection_num FROM "collection" WHERE username=%s', ([user]))
+        collection = cursor.fetchall()
+        connection.close()
+        for i in range(len(collection)):
+            print(str(i) + ": " + str(collection[i][0]))
+        choice = input("Select collection [0-" + str(len(collection) - 1) + "] you want to " + action + "\n")
+        choice = int(choice)
+        if choice >= 0 & choice < len(collection):
+            collection_id = collection[choice][1]
+            return collection_id
+
+"""
+Searches for song to add to collection. 
+Fails if the user doesn't have a collection or if the song already exists in collection.
+"""
+def add_to_collection(user):
+    collection_id = find_collection(user, "add to")
+    if collection_id != "NULL":
+        song_num = searchSong()
+        if song_num == "NULL":
+            return
+        connection = connect()
+        cursor = connection.cursor()
+        cursor.execute('SELECT COUNT("song_num") FROM "collection-song" WHERE "Collection_num"=%s AND "song_num"=%s', (collection_id, song_num))
+        song_exists = cursor.fetchone()[0]
+        cursor.execute('SELECT "Title" FROM "song" WHERE "song_num" = %s', ([song_num]))
+        title = cursor.fetchone()[0]
+        cursor.execute('SELECT "name" FROM "collection" WHERE "collection_num" = %s', ([collection_id]))
+        collection_name = cursor.fetchone()[0]
+        if song_exists == 0:
+            cursor.execute('SELECT length, "Title" FROM "song" WHERE "song_num"=%s', ([song_num]))
+            length = cursor.fetchone()[0]
+            cursor.execute('INSERT INTO "collection-song"("Collection_num", "song_num") VALUES (%s, %s)', (collection_id, song_num))
+            connection.commit()
+            cursor.execute('UPDATE "collection" SET duration = duration + %s WHERE "collection_num" = %s', (length, collection_id))
+            connection.commit()
+            cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs + 1 WHERE "collection_num" = %s', ([collection_id]))
+            print(title, "added to collection", collection_name)
+            connection.commit()
         else:
-            print("The specified collection was not found.")
+            print(title, "is already in collection", collection_name)
     connection.close()
 
 
@@ -88,44 +98,34 @@ def create_collection(user):
     connection.close()
 
 
-def delete_from_collection(user):
+def delete_from_collection(user): # TODO
     connection = connect()
     cursor = connection.cursor()
-    cursor.execute('SELECT COUNT(*) FROM "collection" WHERE username=%s', ([user]))
-    if cursor.fetchone()[0] == 0:
-        print("There are no collections. Create a collection first.")
-        return
-    while True:
-        collect = input("What is the name of the collection you wish to delete from?\n")
-        if collect == "quit":
-            break
-        cursor.execute('SELECT COUNT(*) FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-        find_col = cursor.fetchone()[0]
-        if find_col > 0:
-            song = input("What is the name of the song you wish to delete?\n")
-            if song == "quit":
-                return
-            cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
-            song_nu = cursor.fetchone()[0]
-            cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
-            collect_nu = cursor.fetchone()[0]
-            cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
-            song_exists = cursor.fetchone()[0]
-            if song_exists > 0:
-                cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
-                length = cursor.fetchone()[0]
-                cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
-                connection.commit()
-                cursor.execute('UPDATE "collection" SET duration = duration - %s WHERE "collection_num" = %s', (length, collect_nu))
-                connection.commit()
-                cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs - 1 WHERE "collection_num" = %s', ([collect_nu]))
-                connection.commit()
-                print("Song successfully deleted!")
-            else:
-                print("This song was not found.")
+    collection_id = find_collection(user, "delete")
+    if collection_id != "NULL":
+        song = input("What is the name of the song you wish to delete?\n")
+        if song == "quit":
+            return
+        cursor.execute('SELECT song_num FROM "song" WHERE "Title"=%s', ([song]))
+        song_nu = cursor.fetchone()[0]
+        cursor.execute('SELECT collection_num FROM "collection" WHERE name=%s AND username=%s', (collect, user))
+        collect_nu = cursor.fetchone()[0]
+        cursor.execute('SELECT COUNT(*) FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+        song_exists = cursor.fetchone()[0]
+        if song_exists > 0:
+            cursor.execute('SELECT length FROM "song" WHERE "Title"=%s', ([song]))
+            length = cursor.fetchone()[0]
+            cursor.execute('DELETE FROM "collection-song" WHERE "Collection_num"=%s AND song_num=%s', (collect_nu, song_nu))
+            connection.commit()
+            cursor.execute('UPDATE "collection" SET duration = duration - %s WHERE "collection_num" = %s', (length, collect_nu))
+            connection.commit()
+            cursor.execute('UPDATE "collection" SET num_of_songs = num_of_songs - 1 WHERE "collection_num" = %s', ([collect_nu]))
+            connection.commit()
+            print("Song successfully deleted!")
         else:
-            print("This collection was not found.")
-        connection.close()
+            print("This song was not found.")
+
+    connection.close()
 
 
 def delete_collection(user):
