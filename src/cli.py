@@ -247,8 +247,7 @@ def collections(user):
         print("5: Play a collection")
         print("6: Rename a collection")
         print("7: View all collections")
-        print("8: Recommendations")
-        print("9: Go back")
+        print("8: Go back")
         choice = input()
 
         if choice == "1":
@@ -267,11 +266,47 @@ def collections(user):
             view_collections(user)
         elif choice == "8":
             break
-        elif choice == "9":
-            break
         else:
             print("Unknown command")
-    
+
+def Recommendation(user):
+    print("1: Top 50 most popular songs in the last 30 days")
+    print("2: Top 50 most popular songs among my friends")
+    print("3: Top 5 most popular genres of the month")
+    print("4: For you: Recommendations")
+    print("5: Go Back")
+
+    while True:
+        choice = input()
+        connection = connect()
+        cursor = connection.cursor()
+        if choice == 1:
+            cursor.execute('SELECT song.song_num FROM "user-song" Inner join song on song.song_num = "user-song".song_num group by song.song_num order by sum(play_count)')
+            global_rec = cursor.fetchall();
+            print("Top 50 songs")
+            for i in range(50):
+                print("%s, Title: %s",i,global_rec[i])
+            pass
+        elif choice == 2: #pop among friends
+            cursor.execute('Select song_num, play_count from "user-song" INNER JOIN friends on "user-song".username = friends.follows where friends.user = %s GROUP BY song_num ORDER BY sum(play_count)', ([user]))
+            friend_rec = cursor.fetchall();
+            print("Top 50 songs among friends")
+            for i in range(50):
+                print("%s, Title: %s",i,friend_rec[i])
+            # TODO remove play_count after testing
+
+            pass
+        elif choice == 3: #genre of the month
+            '''SELECT genre.name
+from genre natural join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id natural join "genre_list" "gl" on genre_list_id = "gl".genre_list_id natural join "user-song" on song_num  natural join song s on "user-song".song_num = s.song_num
+GROUP BY song_num
+order by SUM(play_count)'''
+            pass
+        elif choice == 4: #Rec
+
+            pass
+        elif choice == 5: #Go back
+            break
 
 def populateTestData():
     sql_query = os.path.join(os.path.dirname(__file__), f'sample_queries.sql')

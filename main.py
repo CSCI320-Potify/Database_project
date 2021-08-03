@@ -46,7 +46,8 @@ def main():
             print("1: Find songs - WARNING WILL LOOP")
             print("2: Find Users")
             print("3: Collections submenu")
-            print("4: quit")
+            print("4: Recommendations")
+            print("5: quit")
             choice = input()
             if choice == "1":
                 searchSong()
@@ -55,6 +56,8 @@ def main():
             elif choice == "3":
                 collections(current_user)
             elif choice == "4":
+                Recommendation(current_user)
+            elif choice == "5":
                 quit()
             else:
                 print("Unknown command")
