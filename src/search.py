@@ -116,7 +116,8 @@ def displayPages(song_num, action):
     pages = showSongs(order)
 
     for page in range(pages + 1):
-        print("Select song [0-" + str(order % 10) + "] to " + action + "\n")
+        max = (len(order) - 1) % 10
+        print("Select song [0-" + str(max) + "] to " + action + "\n")
         choice = input()
         if page != pages:
             print("Next page? (y|n)")  
@@ -125,7 +126,7 @@ def displayPages(song_num, action):
             elif choice == 'y':
                 break
         choice = int(choice)
-        if choice >= 0 & choice < 10:
+        if choice >= 0 & choice <= max:
             song_num = order[10 * page + choice]
             return song_num
         else:
