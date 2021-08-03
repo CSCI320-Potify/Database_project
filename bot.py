@@ -26,7 +26,7 @@ def run():
 
             child.logfile = sys.stdout
             child.expect('>', timeout=10000)
-            child.sendline('cd C:\\Users\\Charl\\PycharmProjects\\Database_project') #The project directory
+            child.sendline('cd C:\\Users\\raymo\\PycharmProjects\\Database_project') #The project directory
 
             time.sleep(1)
             #child.expect('3')
