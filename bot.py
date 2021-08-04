@@ -1,4 +1,4 @@
-import random
+    import random
 from src.cli import *
 
 import winpexpect

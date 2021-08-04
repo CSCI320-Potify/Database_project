@@ -122,7 +122,7 @@ def displayPages(song_num, action):
         if page != pages:
             print("Next page? (y|n)")  
             if choice == 'n':
-                return
+                return "NULL"
             elif choice == 'y':
                 break
         choice = int(choice)
