@@ -12,7 +12,7 @@ def top_artists(user):
     if played_songs == 0:
         print("You do not have any favorite artists yet. Go and play some music!")
     elif played_songs == 1:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count OFFSET 0', [user])
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s OFFSET 0', [user])
         song_num = cursor.fetchone()[0]
         cursor.execute('SELECT artist_num FROM "artist-song" WHERE song_num=%s', [song_num])
         artist_num = cursor.fetchone()[0]
@@ -20,7 +20,7 @@ def top_artists(user):
         artist = cursor.fetchone()[0]
         print("Your top artist is", artist + ".")
     elif played_songs == 2:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 2 ROWS ONLY', [user])
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 2 ROWS ONLY', [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1"]
         artist = ["0", "1"]
@@ -32,7 +32,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0], "and", artist[1] + ".")
     elif played_songs == 3:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 3 ROWS ONLY', [user])
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 3 ROWS ONLY', [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2"]
         artist = ["0", "1", "2"]
@@ -44,7 +44,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1], "and", artist[2] + ".")
     elif played_songs == 4:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 4 ROWS ONLY', [user])
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 4 ROWS ONLY', [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3"]
         artist = ["0", "1", "2", "3"]
@@ -56,7 +56,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2], "and", artist[3] + ".")
     elif played_songs == 5:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 5 ROWS ONLY', [user])
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 5 ROWS ONLY', [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4"]
         artist = ["0", "1", "2", "3", "4"]
@@ -68,7 +68,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2] + ",", artist[3], "and", artist[4] + ".")
     elif played_songs == 6:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 6 ROWS ONLY',
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 6 ROWS ONLY',
                        [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4", "5"]
@@ -81,7 +81,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2] + ",", artist[3] + ",", artist[4], "and", artist[5] + ".")
     elif played_songs == 7:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 7 ROWS ONLY',
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 7 ROWS ONLY',
                        [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4", "5", "6"]
@@ -94,7 +94,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2] + ",", artist[3] + ",", artist[4] + ",", artist[5], "and", artist[6] + ".")
     elif played_songs == 8:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 8 ROWS ONLY',
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 8 ROWS ONLY',
                        [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4", "5", "6", "7"]
@@ -107,7 +107,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2] + ",", artist[3] + ",", artist[4] + ",", artist[5] + ",", artist[6], "and", artist[7] + ".")
     elif played_songs == 9:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 9 ROWS ONLY',
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 9 ROWS ONLY',
                        [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
@@ -120,7 +120,7 @@ def top_artists(user):
             artist[i] = cursor.fetchone()[0]
         print("Your top artists are", artist[0] + ",", artist[1] + ",", artist[2] + ",", artist[3] + ",", artist[4] + ",", artist[5] + ",", artist[6] + ",", artist[7], "and", artist[8] + ".")
     else:
-        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count FETCH NEXT 10 ROWS ONLY',
+        cursor.execute('SELECT song_num FROM "user-song" WHERE username=%s ORDER BY play_count DESC FETCH NEXT 10 ROWS ONLY',
                        [user])
         song_nums = cursor.fetchall()
         artist_nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
