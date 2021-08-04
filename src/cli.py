@@ -310,13 +310,13 @@ def Recommendation(user):
                 print("%s, Genre: %s" % (i + 1, genre_rec[i]))
             print("")
         elif choice == "4": #Rec
-            cursor.execute('Select genre.id, "a-s".artist_num from genre inner join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id inner join "genre_list" "gl" on "g-gl".genre_list_id = "gl".genre_list_id inner join "song-genre" on "song-genre".genre_list = "g-gl".genre_list_id inner join "user-song" "u-s" on "song-genre".song_num = "u-s".song_num inner join song s on "u-s".song_num = s.song_num inner join "collection-song" "c-s" on s.song_num = "c-s".song_num  inner join "artist-song" "a-s" on "a-s".song_num = s.song_num inner join collection c on c.collection_num = "c-s"."Collection_num" where c.username = %s group by genre.id, "a-s".artist_num order by sum(play_count)', ([user]))
+            cursor.execute('Select artist_num, genre_id from genre inner join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id inner join "genre_list" "gl" on "g-gl".genre_list_id = "gl".genre_list_id inner join "song-genre" on "song-genre".genre_list = "g-gl".genre_list_id inner join "user-song" "u-s" on "song-genre".song_num = "u-s".song_num inner join song s on "u-s".song_num = s.song_num inner join "artist-song" "a-s" on "a-s".song_num = s.song_num inner join "collection-song" "c-s" on s.song_num = "c-s".song_num inner join collection c on c.collection_num = "c-s"."Collection_num" group by genre.id, "a-s".artist_num, "g-gl".genre_id order by sum(play_count)')
             pr = cursor.fetchall()
             if pr == None:
                 print("Your collection is empty please fill it up for the algorithm")
                 break
             u_rec_genre, u_rec_artist = pr
-            cursor.execute('Select "Title" from song s inner JOIN "song-genre" "s-g" on s.song_num = "s-g".song_num inner join "genre-genre_list" "g-gl"  on "g-gl".genre_list_id = "s-g".genre_list inner join genre_list gl on gl.genre_list_id = "g-gl".genre_list_id inner join genre on genre.id = "g-gl".genre_id Where genre.id in %s AND where s.artist_num in %s',([u_rec_genre, u_rec_artist]))
+            cursor.execute('Select "Title" from song s inner JOIN "song-genre" "s-g" on s.song_num = "s-g".song_num inner join "genre-genre_list" "g-gl"  on "g-gl".genre_list_id = "s-g".genre_list inner join genre_list gl on gl.genre_list_id = "g-gl".genre_list_id inner join genre on genre.id = "g-gl".genre_id Where genre.id in %s AND where s.artist_num in %s',(u_rec_genre, u_rec_artist))
             matching_songs=cursor.fetchall()
             cursor.execute('Select "Title" from song s inner join "collection-song" "c-s" on s.song_num = "c-s".song_num inner join collection on collection.collection_num = "c-s"."Collection_num" where collection.username = %s',([user]))
             user_song = cursor.fetchall()
