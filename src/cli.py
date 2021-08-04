@@ -206,7 +206,7 @@ def rename_collection(user):
             break
     if rename == "!q":
         return
-    cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collect, user))
+    cursor.execute('UPDATE "collection" SET name=%s WHERE name=%s AND username=%s', (rename, collection_num, user))
     connection.commit()
     print("Collection successfully renamed!")
     connection.close()

@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+    import random
+=======
 import random
 
 import pexpect
+>>>>>>> 85ff311c66a39b0c4b28e0119a4c6419268f2825
 from src.cli import *
 
 import winpexpect

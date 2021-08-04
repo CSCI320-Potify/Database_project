@@ -48,7 +48,7 @@ def csv_import(filename):
 
             if duplicateSong != None:
                 print(line + "was duplicated")
-                continue;
+                continue
 
 
             #adds genres
