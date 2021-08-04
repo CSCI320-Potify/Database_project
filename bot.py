@@ -1,4 +1,10 @@
+<<<<<<< HEAD
     import random
+=======
+import random
+
+import pexpect
+>>>>>>> 85ff311c66a39b0c4b28e0119a4c6419268f2825
 from src.cli import *
 
 import winpexpect
@@ -11,27 +17,33 @@ numerics = ["!","xxx", "FAZE", "crypto", "%","$","&","^","*"]
 email_list = ["@yahoo", "@yandex", "@google", "@raytheon", "@rit", "@intel"]
 dot_list = [".com", ".org", ".net", ".uk", ".phishing"]
 
-connection = connect()
-cursor = connection.cursor()
-i = 0
+
+
+
 
 
 def run():
     try:
+        i = 0
+        child = winpexpect.winspawn('cmd.exe', timeout=20)
         while True:
             main_menu = random.randint(1,2)
-            time.sleep(2)
+            time.sleep(5)
 
-            child = winpexpect.winspawn('cmd.exe', timeout=20)
+
 
             child.logfile = sys.stdout
             child.expect('>', timeout=10000)
-            child.sendline('cd C:\\Users\\Charl\\PycharmProjects\\Database_project') #The project directory
+            child.sendline('cd C:\\Users\\raymo\\PycharmProjects\\Database_project') #The project directory
 
             time.sleep(1)
             #child.expect('3')
             child.sendline('python main.py')
             child.expect('3: Close client')
+
+            connection = connect()
+            cursor = connection.cursor()
+
             child.sendline(str(main_menu))
             if main_menu == 1: #login
                 cursor.execute('SELECT username, password from "user" ORDER BY random()')
@@ -65,15 +77,6 @@ def run():
             child.expect("quit")
             sub_menu = random.randint(2,3) ######################might be 2,3
             child.sendline(str(sub_menu))
-            #if sub_menu == 1: #find song
-            #    child.expect("Search song by:")
-            #    child.sendline(str(3))
-            #    child.expect("Enter in a genre. Press <enter> to add genre.")
-            #    child.sendline("!q")
-            #    child.expect("Sort by (default alphabetically by title): [artist(0) | genre(1) | release year(2)] | [descending(d)")
-            #    child.sendline(str(random.randint(0,2)))
-            #    child.expect("0")
-            #    child.sendline()
 
             if sub_menu == 2: #find users
                 cursor.execute('Select email from "user" ORDER BY random()')
@@ -97,7 +100,6 @@ def run():
             if sub_menu == 3: #collections
                 child.expect("Select one of the following options")
                 collections_options = ["1", "2", "5"][random.randint(0, 2)]
-                print("user_name is " + user_name)
                 cursor.execute('SELECT name from collection where username = %s', ([user_name]))
                 collection_list = cursor.fetchall()
                 if (len(collection_list) == 0):
@@ -125,7 +127,7 @@ def run():
                                    "What is the name of the song you wish to add to Song?"])
                     child.sendline("quit")
 
-                if(collections_options == "2"): #create new collection
+                elif(collections_options == "2"): #create new collection
                     child.expect("What is the name of the collection you wish to add?")
                     collection_name = ["Party Mix ", "Disco ", "Epic ", "Too Groovy ", "Bass Boosted ", ""][random.randint(0,5)]+ names.get_full_name() +" "+numerics[random.randint(0,len(numerics)-1)]
                     if(len(collection_name)>=19):
@@ -138,10 +140,15 @@ def run():
                 child.sendline("8")
 
             child.expect("5: quit")
+            cursor.close()
             child.sendline(str(5))
-            child.close()
+
             print(str(i) +"th time access successful")
-    except:
+            i += 1
+    except Exception as e:
+        if not isinstance(e, pexpect.TIMEOUT):
+            print(e)
+        child.close()
         run()
 try:
     run()
