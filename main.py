@@ -157,23 +157,23 @@ def main():
         quit()
 
     if current_user != '':
-        print("Welcome Back " + current_user)
-        connection = connect()
-        cursor = connection.cursor()
-        cursor.execute('SELECT COUNT(*) from "collection" WHERE username=%s', [current_user])
-        collect_amt = cursor.fetchone()[0]
-        print("You have", collect_amt, "collections.")
-        cursor.execute('SELECT COUNT(*) from "friends" WHERE follows=%s', [current_user])
-        followers = cursor.fetchone()[0]
-        print("You have", followers, "followers.")
-        cursor.execute('SELECT COUNT(*) from "friends" WHERE "user"=%s', [current_user])
-        following = cursor.fetchone()[0]
-        if following == 1:
-            print("You are following 1 person.")
-        else:
-            print("You are following", following, "people.")
-        top_artists(current_user)
         while True:
+            print("Welcome " + current_user)
+            connection = connect()
+            cursor = connection.cursor()
+            cursor.execute('SELECT COUNT(*) from "collection" WHERE username=%s', [current_user])
+            collect_amt = cursor.fetchone()[0]
+            print("You have", collect_amt, "collections.")
+            cursor.execute('SELECT COUNT(*) from "friends" WHERE follows=%s', [current_user])
+            followers = cursor.fetchone()[0]
+            print("You have", followers, "followers.")
+            cursor.execute('SELECT COUNT(*) from "friends" WHERE "user"=%s', [current_user])
+            following = cursor.fetchone()[0]
+            if following == 1:
+                print("You are following 1 person.")
+            else:
+                print("You are following", following, "people.")
+            top_artists(current_user)
             print("Select one of the 1 following options")
             print("1: Find songs - WARNING WILL LOOP")
             print("2: Find Users")
