@@ -179,7 +179,7 @@ def main():
             print("2: Find Users")
             print("3: Collections submenu")
             print("4: Recommendations")
-            print("5: quit")
+            print("5: quit\n")
             choice = input()
             if choice == "1":
                 searchSong()

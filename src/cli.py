@@ -271,42 +271,66 @@ def collections(user):
             print("Unknown command")
 
 def Recommendation(user):
-    print("1: Top 50 most popular songs in the last 30 days")
-    print("2: Top 50 most popular songs among my friends")
-    print("3: Top 5 most popular genres of the month")
-    print("4: For you: Recommendations")
-    print("5: Go Back")
-
     while True:
+        print("1: Top 50 most popular songs in the last 30 days")
+        print("2: Top 50 most popular songs among my friends")
+        print("3: Top 5 most popular genres of the month")
+        print("4: For you: Recommendations")
+        print("5: Go Back\n")
+
         choice = input()
         connection = connect()
         cursor = connection.cursor()
-        if choice == 1:
-            cursor.execute('SELECT song.song_num FROM "user-song" Inner join song on song.song_num = "user-song".song_num group by song.song_num order by sum(play_count)')
+        if choice == "1":
+            cursor.execute('SELECT "Title" from "song" where "song".song_num IN (SELECT song.song_num FROM "user-song" Inner join song on song.song_num = "user-song".song_num group by song.song_num order by sum(play_count))')
             global_rec = cursor.fetchall();
             print("Top 50 songs")
-            for i in range(50):
-                print("%s, Title: %s",i,global_rec[i])
-            pass
-        elif choice == 2: #pop among friends
-            cursor.execute('Select song_num, play_count from "user-song" INNER JOIN friends on "user-song".username = friends.follows where friends.user = %s GROUP BY song_num ORDER BY sum(play_count)', ([user]))
+            range_rec = min(50, len(global_rec))
+            for i in range(range_rec):
+                print("Number: %s, Title: %s" % (i+1, global_rec[i]))
+            print("")
+        elif choice == "2": #pop among friends
+            cursor.execute('SELECT "Title" from "song" where "song".song_num IN (Select song_num from "user-song" INNER JOIN friends on "user-song".username = friends.follows where friends.user = %s GROUP BY song_num ORDER BY sum(play_count))', ([user]))
             friend_rec = cursor.fetchall();
-            print("Top 50 songs among friends")
-            for i in range(50):
-                print("%s, Title: %s",i,friend_rec[i])
-            # TODO remove play_count after testing
 
-            pass
-        elif choice == 3: #genre of the month
-            '''SELECT genre.name
-from genre natural join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id natural join "genre_list" "gl" on genre_list_id = "gl".genre_list_id natural join "user-song" on song_num  natural join song s on "user-song".song_num = s.song_num
-GROUP BY song_num
-order by SUM(play_count)'''
-            pass
-        elif choice == 4: #Rec
+            print("Top 50 songs among friends\n")
+            range_rec = min(50, len(friend_rec))
+            if range_rec == 0:
+                print("You either have no friends or you're friends have listened to 0 songs\n")
+                continue
+            for i in range(range_rec):
+                print("%s, Title: %s" % (i+1, friend_rec[i]))
+            print("")
 
-            pass
-        elif choice == 5: #Go back
+        elif choice == "3": #genre of the month
+            cursor.execute('SELECT genre.name from genre inner join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id inner join "genre_list" "gl" on "g-gl".genre_list_id = "gl".genre_list_id inner join "song-genre" on "song-genre".genre_list = "g-gl".genre_list_id inner join "user-song" "u-s" on "song-genre".song_num = "u-s".song_num inner join song s on "u-s".song_num = s.song_num GROUP BY genre.name order by SUM(play_count)')
+            genre_rec = cursor.fetchall()
+            range_rec = min(len(genre_rec), 5)
+            for i in range(range_rec):
+                print("%s, Genre: %s" % (i + 1, genre_rec[i]))
+            print("")
+        elif choice == "4": #Rec
+            cursor.execute('Select genre.id, "a-s".artist_num from genre inner join "genre-genre_list" "g-gl" on genre.id = "g-gl".genre_id inner join "genre_list" "gl" on "g-gl".genre_list_id = "gl".genre_list_id inner join "song-genre" on "song-genre".genre_list = "g-gl".genre_list_id inner join "user-song" "u-s" on "song-genre".song_num = "u-s".song_num inner join song s on "u-s".song_num = s.song_num inner join "collection-song" "c-s" on s.song_num = "c-s".song_num  inner join "artist-song" "a-s" on "a-s".song_num = s.song_num inner join collection c on c.collection_num = "c-s"."Collection_num" where c.username = %s group by genre.id, "a-s".artist_num order by sum(play_count)', ([user]))
+            pr = cursor.fetchall()
+            if pr == None:
+                print("Your collection is empty please fill it up for the algorithm")
+                break
+            u_rec_genre, u_rec_artist = pr
+            cursor.execute('Select "Title" from song s inner JOIN "song-genre" "s-g" on s.song_num = "s-g".song_num inner join "genre-genre_list" "g-gl"  on "g-gl".genre_list_id = "s-g".genre_list inner join genre_list gl on gl.genre_list_id = "g-gl".genre_list_id inner join genre on genre.id = "g-gl".genre_id Where genre.id in %s AND where s.artist_num in %s',([u_rec_genre, u_rec_artist]))
+            matching_songs=cursor.fetchall()
+            cursor.execute('Select "Title" from song s inner join "collection-song" "c-s" on s.song_num = "c-s".song_num inner join collection on collection.collection_num = "c-s"."Collection_num" where collection.username = %s',([user]))
+            user_song = cursor.fetchall()
+            max_selection = 5
+            index = 0
+            for i in range(len(matching_songs)):
+                if matching_songs[i] in user_song:
+                    pass
+                else:
+                    print(str(i+1) + "Title: " + matching_songs[i])
+                    index +=1
+                if index == max_selection:
+                    break
+        elif choice == "5": #Go back
             break
 
 def populateTestData():
